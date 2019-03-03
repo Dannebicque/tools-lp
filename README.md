@@ -26,8 +26,70 @@ Un test est du code permettant de tester du code.
 
 ## Application au projet de démonstration
 
+Installation des éléments pour les tests (dont PHPUnit)
+
+````
+composer require test-pack
+````
+
+Tous les fichiers de tests doivent êtres écrits dans le répertoire "tests/" de votre projet.
+
+On peut utiliser la console et le maker pour créer la structure d'un fichier de test.
+
+````
+bin/console make:functional-test
+````
+
+Pour exécuter l'ensemble des tests avec la configuration par défaut il faudra executer la commande suivante :
+
+````
+bin/phpunit
+````
+
+Lors de la première exécution il est possible que PhpUnit se télécharge dans votre projet.
+
 # Exemple guidé
+
+Testons par exemple si notre page d'accueil fonctionne correctement. Pour cela, on peut effectuer un test qui simule l'accès à l'URL "/" et qui regarde si la réponse est 200 (page rendue correctement) et si le contenu de la page est celui attendu. Par exemple, on recherche le contenu de notre balise H1. Si le test trouve la phrase, alors il sera valide.
+
+````
+bin/console make:functional-test
+````
+
+La console vous demande un nom de fichier de test
+
+````
+ The name of the functional test class (e.g. DefaultControllerTest):
+ > DefaultControllerTest
+
+ created: tests/DefaultControllerTest.php
+````
+
+Le code produit est équivalent à celui ci-après
+
+````
+<?php
+
+namespace App\Tests;
+
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
+class DefaultControllerTest extends WebTestCase
+{
+    public function testSomething()
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertContains('Liste des articles', $crawler->filter('h1')->text());
+        // Liste des articles est le texte recherché dans la page, dans la balise h1.
+    }
+}
+````
+
+Dans l'exemple ci-dessous, on execute un test (une méthode) et deux assertions (deux vérifications dans la même méthode (200 et le contenu de la balise H1).
 
 # Les autres tests à mettre en place
 
-
+Ecrivez les différents tests afin de vérifier que toutes vos pages sont accessibles.
