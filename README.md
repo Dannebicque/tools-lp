@@ -9,7 +9,7 @@ Le cours se base sur un projet Symfony, mais les concepts (et les outils/librair
 
 ## Plan et sommaire du cours
 
-* [concepts](concepts)
+* [concepts](concepts-du-testing)
 
 ## Concepts du testing
 
