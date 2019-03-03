@@ -9,9 +9,18 @@ Le cours se base sur un projet Symfony, mais les concepts (et les outils/librair
 
 ## Plan et sommaire du cours
 
-* [concepts](concepts-du-testing)
+* [Concepts du testing](#concepts-du-testing)
+* [Outils existants](#outils-existants) 
 
 ## Concepts du testing
+
+En informatique, un test désigne une procédure de vérification partielle d'un système. Son objectif principal est d'identifier un nombre maximum de comportements problématiques du logiciel. Il permet ainsi, dès lors que les problèmes identifiés seront corrigés, d'en augmenter la qualité.
+
+L'écriture de tests permet de s'assurer que son code fonctionne dans toutes les situations possibles, sans devoir passer par une phase (longue, fastidieuse et innéficace) de tests manuels.
+
+Un test est du code permettant de tester du code.
+
+## Outils existants
 
 ## Récupération du projet de démonstration
 
