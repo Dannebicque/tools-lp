@@ -17,7 +17,7 @@ Le cours se base sur un projet Symfony, mais les concepts (et les outils/librair
   * [Utilisation de PHPUnit](#utilisation-de-PHPUnit)
 * [Cas Pratique](#cas-pratique)
   * [Récupération du projet de démonstration](#Recuperation-du-projet-de-demonstration)
-  * [Application au projet de démonstration](#Application-au-projet de-demonstration)
+  * [Application au projet de démonstration](#Application-au-projet-de-demonstration)
   * [Exemple guidé](#Exemple-guide)
   * [Les autres tests à mettre en place](#Les-autres-tests-a-mettre-en-place)
 * [Tester les liens](#Tester-les-liens)
@@ -54,6 +54,7 @@ Un test est du code permettant de tester du code.
 
 # Utilisation de PHPUnit
 
+Expliquer le concept du crawler et du "navigateur" embarqué pour simuler
 
 ## Cas Pratique
 
@@ -142,6 +143,24 @@ Ecrivez les différents tests afin de vérifier que toutes vos pages sont access
 # Théorie
 
 # Cas pratique
+
+````
+ public function testClickAcheter() {
+
+     $client = static::createClient();
+     $crawler = $client->request('GET', '/');
+
+     $link = $crawler
+         ->filter('a:contains("Acheter")') // find all links with the text "Greet"
+         ->eq(0) // select the second link in the list
+         ->link()
+     ;
+
+     $crawler = $client->click($link);
+     $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+ }
+ ````
 
 ## Tester les formulaires
 
