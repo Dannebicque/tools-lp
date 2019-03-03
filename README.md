@@ -44,21 +44,21 @@ L'écriture de tests permet de s'assurer que son code fonctionne dans toutes les
 
 Un test est du code permettant de tester du code.
 
-# Tests unitaires
+### Tests unitaires
 
-# Tests fonctionnels
+### Tests fonctionnels
 
 ## Outils existants
 
-# Rapide comparatif
+### Rapide comparatif
 
-# Utilisation de PHPUnit
+### Utilisation de PHPUnit
 
 Expliquer le concept du crawler et du "navigateur" embarqué pour simuler
 
 ## Cas Pratique
 
-# Récupération du projet de démonstration
+### Récupération du projet de démonstration
 
 Une application basique (DUTAF pour les MMI), est disponible sur le dépôt : [https://github.com/Dannebicque/dutafLP.git](https://github.com/Dannebicque/dutafLP.git)
 
@@ -68,7 +68,7 @@ L'apparence n'a pas d'importance et fera l'objet d'un TP autour de Webpack-Encor
 
 Récupérer le projet, configurer la base de donner, créer la table et les tables, ajouter quelques données. On pourrait écrire des fixtures afin de peupler la base de données avec des données fivtives [Documentation sur les fixtures](https://symfony.com/doc/2.0/bundles/DoctrineFixturesBundle/index.html).
 
-# Application au projet de démonstration
+### Application au projet de démonstration
 
 Installation des éléments pour les tests (dont PHPUnit)
 
@@ -92,7 +92,7 @@ bin/phpunit
 
 Lors de la première exécution il est possible que PhpUnit se télécharge dans votre projet.
 
-# Exemple guidé
+### Exemple guidé
 
 Testons par exemple si notre page d'accueil fonctionne correctement. Pour cela, on peut effectuer un test qui simule l'accès à l'URL "/" et qui regarde si la réponse est 200 (page rendue correctement) et si le contenu de la page est celui attendu. Par exemple, on recherche le contenu de notre balise H1. Si le test trouve la phrase, alors il sera valide.
 
@@ -134,15 +134,15 @@ class DefaultControllerTest extends WebTestCase
 
 Dans l'exemple ci-dessous, on execute un test (une méthode) et deux assertions (deux vérifications dans la même méthode (200 et le contenu de la balise H1).
 
-# Les autres tests à mettre en place
+### Les autres tests à mettre en place
 
 Ecrivez les différents tests afin de vérifier que toutes vos pages sont accessibles.
 
 ## Tester les liens
 
-# Théorie
+### Théorie
 
-# Cas pratique
+### Cas pratique
 
 ````
  public function testClickAcheter() {
@@ -164,24 +164,24 @@ Ecrivez les différents tests afin de vérifier que toutes vos pages sont access
 
 ## Tester les formulaires
 
-# Théorie
+### Théorie
 
-# Cas pratique
+### Cas pratique
 
 ## Tester la base de données
 
-# Théorie
+### Théorie
 
-# Cas pratique
+### Cas pratique
 
 ## Tester avec un accès sécurisé
 
-# Théorie
+### Théorie
 
-# Cas pratique
+### Cas pratique
 
 ## Tests Unitaires
 
-# Théorie
+### Théorie
 
-# Cas pratique
+### Cas pratique
