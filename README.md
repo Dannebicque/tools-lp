@@ -10,7 +10,31 @@ Le cours se base sur un projet Symfony, mais les concepts (et les outils/librair
 ## Plan et sommaire du cours
 
 * [Concepts du testing](#concepts-du-testing)
-* [Outils existants](#outils-existants) 
+ * [Tests unitaires](#tests-unitaires)
+ * [Tests fonctionnels](#tests-fonctionnels)
+* [Outils existants](#outils-existants)
+ * [Rapide comparatif](#Rapide comparatif)
+ * [Utilisation de PHPUnit](#Utilisation de PHPUnit)
+* [Cas Pratique](#Cas Pratique)
+ * [Récupération du projet de démonstration](#Récupération du projet de démonstration)
+ * [Application au projet de démonstration](#Application au projet de démonstration)
+ * [Exemple guidé](#Exemple guidé)
+ * [Les autres tests à mettre en place](#Les autres tests à mettre en place)
+* [Tester les liens](#Tester les liens)
+ * [Théorie](#theorie)
+ * [Cas pratique](#theorie)
+* [Tester les formulaires](#Tester les formulaires)
+ * [Théorie](#theorie)
+ * [Cas pratique](#theorie)
+* [Tester la base de données](#Tester la base de données)
+ * [Théorie](#theorie)
+ * [Cas pratique](#theorie)
+* [Tester avec un accès sécurisé](#Tester avec un accès sécurisé)
+ * [Théorie](#theorie)
+ * [Cas pratique](#theorie)
+* [Tests Unitaires](#Tests Unitaires)
+ * [Théorie](#theorie)
+ * [Cas pratique](#theorie)
 
 ## Concepts du testing
 
@@ -20,11 +44,30 @@ L'écriture de tests permet de s'assurer que son code fonctionne dans toutes les
 
 Un test est du code permettant de tester du code.
 
+# Tests unitaires
+
+# Tests fonctionnels
+
 ## Outils existants
 
-## Récupération du projet de démonstration
+# Rapide comparatif
 
-## Application au projet de démonstration
+# Utilisation de PHPUnit
+
+
+## Cas Pratique
+
+# Récupération du projet de démonstration
+
+Une application basique (DUTAF pour les MMI), est disponible sur le dépôt : [https://github.com/Dannebicque/dutafLP.git](https://github.com/Dannebicque/dutafLP.git)
+
+Ce projet est composé de deux tables, d'une gestion des articles, des fournisseurs et d'une page d'accueil.
+
+L'apparence n'a pas d'importance et fera l'objet d'un TP autour de Webpack-Encore.
+
+Récupérer le projet, configurer la base de donner, créer la table et les tables, ajouter quelques données. On pourrait écrire des fixtures afin de peupler la base de données avec des données fivtives [Documentation sur les fixtures](https://symfony.com/doc/2.0/bundles/DoctrineFixturesBundle/index.html).
+
+# Application au projet de démonstration
 
 Installation des éléments pour les tests (dont PHPUnit)
 
@@ -93,3 +136,33 @@ Dans l'exemple ci-dessous, on execute un test (une méthode) et deux assertions 
 # Les autres tests à mettre en place
 
 Ecrivez les différents tests afin de vérifier que toutes vos pages sont accessibles.
+
+## Tester les liens
+
+# Théorie
+
+# Cas pratique
+
+## Tester les formulaires
+
+# Théorie
+
+# Cas pratique
+
+## Tester la base de données
+
+# Théorie
+
+# Cas pratique
+
+## Tester avec un accès sécurisé
+
+# Théorie
+
+# Cas pratique
+
+## Tests Unitaires
+
+# Théorie
+
+# Cas pratique
