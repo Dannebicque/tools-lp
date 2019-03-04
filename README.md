@@ -63,9 +63,13 @@ Les tests unitaires nécessitent d'utiliser des bundles permettant de naviguer d
 
 ## Outils existants
 
-
-
 ### Rapide comparatif
+
+Il existe globalment deux outils utilisés par la communauté PHP :  PHPUnit et Behat. Ces deux outils peuvent être complémentaire (ils n'ont pas exactement la même approche du testing), ou utilisés de manière indépendante (ils peuvent malgré tout effectuer les mêmes tests, ou en tout cas attester du bon fonctionnement de votre application.
+
+Cependant, on va préférer choisir Behat pour tester uniquement un comportement d'application (BDD : Behaviour Driven Design), sans se soucier du fonctionnement interne de l'application (ce que pourrait malgré tout faire Behat). PHPunit est plutôt orienté sur le fonctionnemet même de l'application (tests unitaires par exemple), mais peut aussi executer des tests fonctionnels. On qualifie généralement PHPUnit d'outil de TDD (Test Data Driven).
+
+Il peut parfois être pertinent d'utiliser les deux outils afin de profiter de leurs points forts respectifs.
 
 ### Utilisation de PHPUnit
 
@@ -149,7 +153,8 @@ class DefaultControllerTest extends WebTestCase
 
 Dans l'exemple ci-dessous, on execute un test (une méthode) et deux assertions (deux vérifications dans la même méthode (la réponse est égale à 200 et le contenu de la balise H1).
 
-La méthode request() retourne un Crawler, qui est un object contenant, entre autre, la réponse du navigateur. Il est possible de naviguer avec le crawler dans la page afin de détecter un élément (une balise), des liens ou encore un formulaire.
+La méthode request() retourne un **crawler** (*robot*), qui est un object contenant, entre autre, la réponse du navigateur. 
+
 
 ### Les autres tests à mettre en place
 
@@ -159,11 +164,13 @@ Ecrivez les différents tests afin de vérifier que toutes vos pages sont access
 
 ### Théorie
 
+Le robot peut également être utilisé pour interagir avec la page (détecter un élément (une balise), des liens ou encore un formulaire). Cliquez sur un lien en le sélectionnant d'abord avec le robot à l'aide d'une expression [XPath](https://www.w3schools.com/xml/xpath_intro.asp) ou d'un sélecteur CSS, puis utilisez le client pour cliquer dessus.
+
 Pour tester les liens contenus dans une page, il faut :
 
 1. Executer une requète pour accéder à la page
-2. Obtenir le Crawler associé afin de la parcourir
-3. Parcourir le Crawler à la recherche de votre élément
+2. Obtenir le crawler/robot associé afin de la parcourir
+3. Parcourir avec le crawler à la recherche de votre élément
 4. Simuler le click
 5. Regarder la réponse obtenue et la comparer si besoin
 
@@ -191,8 +198,35 @@ Pour tester les liens contenus dans une page, il faut :
 
 ### Théorie
 
+Pour tester un formulaire, et tout particulierement sa soumission, la démarche est assez similaire.
+
+1. Executer une requète pour accéder à la page
+2. Obtenir le crawler/robot associé afin de la parcourir
+3. Parcourir avec le crawler à la recherche d'un bouton de type submit
+4. Eventuellement adapter les valeurs du formulaire
+4. Simuler le click
+5. Regarder la réponse obtenue et la comparer si besoin
+
 ### Cas pratique
 
+````
+ public function testClickAcheter() {
+
+     $client = static::createClient();
+     $crawler = $client->request('GET', '/');
+
+    $form = $crawler->selectButton('submit')->form();
+
+    // set some values
+    $form['name'] = 'Lucas';
+    $form['form_name[subject]'] = 'Hey there!';
+
+    // submit the form
+    $crawler = $client->submit($form);
+    $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+ }
+ ````
 ## Tester la base de données
 
 ### Théorie
