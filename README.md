@@ -210,7 +210,7 @@ Pour tester un formulaire, et tout particulierement sa soumission, la démarche 
 ### Cas pratique
 
 ````
- public function testClickAcheter() {
+ public function testValideFormulaire() {
 
      $client = static::createClient();
      $crawler = $client->request('GET', '/');
@@ -227,17 +227,202 @@ Pour tester un formulaire, et tout particulierement sa soumission, la démarche 
 
  }
  ````
+### Application
+
+Ecrire un test qui vérifie votre formulaire de création d'un fournisseur. Selon-vous, et selon le code écrit quel est la réponse attendue ?
+Que pouvez vous noter sur votre base de données ?
+
+## Tester le contenu de vos pages
+
+Grâce au Crawler vous pouvez donc vous assurer du contenu de vos pages. En effet, idéalement, il ne faudrait pas simplement s'assurer de la réponse du navigateur (même si vérifier déjà cela permet de s'assurer de ne pas avoir de liens morts). Mais rien ne garanti que la page affichée correspond à celle qui devrait l'être.
+
+Il existe de très nombreuses "assert" pour tester de nombreux cas de figure. Symfony propose la liste suivante comme tests de base :
+
+````
+// asserts that there is at least one h2 tag
+// with the class "subtitle"
+$this->assertGreaterThan(
+    0,
+    $crawler->filter('h2.subtitle')->count()
+);
+
+// asserts that there are exactly 4 h2 tags on the page
+$this->assertCount(4, $crawler->filter('h2'));
+
+// asserts that the "Content-Type" header is "application/json"
+$this->assertTrue(
+    $client->getResponse()->headers->contains(
+        'Content-Type',
+        'application/json'
+    ),
+    'the "Content-Type" header is "application/json"' // optional message shown on failure
+);
+
+// asserts that the response content contains a string
+$this->assertContains('foo', $client->getResponse()->getContent());
+// ...or matches a regex
+$this->assertRegExp('/foo(bar)?/', $client->getResponse()->getContent());
+
+// asserts that the response status code is 2xx
+$this->assertTrue($client->getResponse()->isSuccessful(), 'response status is 2xx');
+// asserts that the response status code is 404
+$this->assertTrue($client->getResponse()->isNotFound());
+// asserts a specific 200 status code
+$this->assertEquals(
+    200, // or Symfony\Component\HttpFoundation\Response::HTTP_OK
+    $client->getResponse()->getStatusCode()
+);
+
+// asserts that the response is a redirect to /demo/contact
+$this->assertTrue(
+    $client->getResponse()->isRedirect('/demo/contact')
+    // if the redirection URL was generated as an absolute URL
+    // $client->getResponse()->isRedirect('http://localhost/demo/contact')
+);
+// ...or simply check that the response is a redirect to any URL
+$this->assertTrue($client->getResponse()->isRedirect());
+````
+
+## Tester de nombreuses données.
+
+### Théorie
+
+Dans notre cas il est simple et rapide d'écrire les tests. Le nombre de page est réduit, et il est d'ailleur presque superflu d'utiliser des tests pour une application aussi légére.
+
+Lorsque l'application commence à grossier et que les URLs se multiplient, il devient possible de définir un ensemble de données (un tableau d'URL à tester par exemple), et de les tester successivement. PhPUnit nous informera des URLs posant problème.
+
+### Cas pratique
+
+````
+/**
+ * @dataProvider provideUrls
+ */
+public function testPageIsSuccessful($url)
+{
+    $client = self::createClient();
+    $client->request('GET', $url);
+
+    $this->assertTrue($client->getResponse()->isSuccessful());
+}
+
+public function provideUrls()
+{
+    return [
+        ['/'],
+        ['/blog'],
+        ['/contact'],
+        // ...
+    ];
+}
+````
+
+Ne pas oublier l'annotation sur la méthode de test c'est elle qui permet de faire le lien avec le tableau d'URL à tester. Chaque URL va correspondre à un test.
+
+## Simuler d'autres requêtes
+
+Dans les exemples précédents nous n'avons testés que des requêtes de type Get (ou POST lors de l'envoi du formulaire. l est psosible de tester des requetes GET, POST, DELETE, PUT, des appels AJAX, de l'Upload de fichier, ...
+
+Tout ce que vous pouvez faire sur votre application peut être testé via PHPUnit.
+
+### Point Behat
+
+Dans ce contexte de navigation "complexe" Behat pourrait sembler plus adapté, car Behat propose la possibilité d'écrire un scénario (avec une syntaxe propre), sans devoir écrire tout le code PHP qui va venir simuler chaque interaction d'un utilisateur. 
+
+Exemple de scénario:
+
+````
+Feature: Product basket
+  In order to buy products
+  As a customer
+  I need to be able to put interesting products into a basket
+
+  Rules:
+  - VAT is 20%
+  - Delivery for basket under £10 is £3
+  - Delivery for basket over £10 is £2
+
+  Scenario: Buying a single product under £10
+    Given there is a "Sith Lord Lightsaber", which costs £5
+    When I add the "Sith Lord Lightsaber" to the basket
+    Then I should have 1 product in the basket
+    And the overall basket price should be £9
+
+  Scenario: Buying a single product over £10
+    Given there is a "Sith Lord Lightsaber", which costs £15
+    When I add the "Sith Lord Lightsaber" to the basket
+    Then I should have 1 product in the basket
+    And the overall basket price should be £20
+
+  Scenario: Buying two products over £10
+    Given there is a "Sith Lord Lightsaber", which costs £10
+    And there is a "Jedi Lightsaber", which costs £5
+    When I add the "Sith Lord Lightsaber" to the basket
+    And I add the "Jedi Lightsaber" to the basket
+    Then I should have 2 products in the basket
+    And the overall basket price should be £20
+````
+
+## Parcourir
+
+Le client prend en charge de nombreuses opérations pouvant être effectuées dans un navigateur réel:
+
+````
+$client->back();
+$client->forward();
+$client->reload();
+
+// clears all cookies and the history
+$client->restart();
+````
+
+REMARQUE
+Les méthodes back()et forward()ignorent les redirections qui peuvent s'être produites lors de la demande d'une URL, comme le font les navigateurs classiques.
+
 ## Tester la base de données
 
 ### Théorie
+Lors d'un test fonctionnel, vous devrez peut-être préparer une base de données de test avec des valeurs prédéfinies pour vous assurer que votre test dispose toujours des mêmes données.
+En effet, vous l'avez remarqué en testant le formulaire, les données sont ajoutées dans la base de données "principale" de votre application, ce qui peut poser des problèmes.
 
 ### Cas pratique
 
-## Tester avec un accès sécurisé
+Il est possible de redéfinir la variable de connexion des fichiers .env (DATABASE_URL) dans le fichier de configuration PHPUnit : phpunit.xml
 
-### Théorie
+Dans ce fichier vous pouvez configurer les tests à effectuer, le paramétrage de votre aplication, et donc l'accès à une base de données de tests. Si PHPUnit trouve une ligne de connexion dans ce fichier il ignaurera les informations de votre fichier .env (ou .env.local)
 
-### Cas pratique
+Il vous faudra aussi définir un fichier .env.test (à partir de la version 4.2), qui contiendra cette configuration de test. Cela permettra de disposer de deux bases de données. Une pour le mode de développement (ou production) et une pour les tests
+
+#### Le fichier phpunit.xml
+
+Ajouter la ligne ci-dessous avec vos informations:
+````
+<php>
+   ...
+   <env name="DATABASE_URL" value="mysql://USER:PASSWORD@127.0.0.1:8889/basedetest" />
+</php>
+````
+
+#### Le fichier .env.test
+
+````
+DATABASE_URL=mysql://USER:PASSWORD@127.0.0.1:8889/basedetest
+````
+
+Il faut ensuite créer la base de données, mettre à jour les tables, et éventuellement executer des fixtures pour l'alimenter.
+Il faut bien penser à préciser l'environnement `--env=test`.
+
+````
+bin/console doctrine:database:create --env=test
+bin/console doctrine:schema:update -f --env=test //ou via les migrations
+````
+
+Vous pouvez vous faire un script qui avant chaque phase de test :
+
+1. efface la base de données de test,
+2. Créé la base de données de test
+3. Ajoute les tables
+4. Execute éventuellement les fixtures
+5. Execute PHPUnit
 
 ## Tests Unitaires
 
