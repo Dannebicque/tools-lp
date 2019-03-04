@@ -46,15 +46,30 @@ Un test est du code permettant de tester du code.
 
 ### Tests unitaires
 
+Un test unitaire est un test sur une seule classe PHP, également appelée unité. Si vous souhaitez tester le comportement général de votre application, reportez-vous à la section relative aux tests fonctionnels.
+
+Un test unitaire va par exemple tester une méthode spécifique, ou les méthodes d'une classe dédiée à des calculs ou des concepts métiers (les services dans symfony par exemple).
+
 ### Tests fonctionnels
 
+Les tests fonctionnels vérifient l'intégration des différentes couches d'une application (du routage aux vues). En ce qui concerne PHPUnit, ils ne diffèrent pas des tests unitaires, mais ils ont un flux de travail très spécifique:
+
+1. Faire une demande;
+2. Cliquez sur un lien ou soumettez un formulaire.
+3. Tester la réponse;
+4. "Rincer" et répéter.
+
+Les tests unitaires nécessitent d'utiliser des bundles permettant de naviguer dans le code produit (des crawler), mais également permettant de "simuler" un navigateur (browser) afin de récuperer les réponses. Par défaut ces outils sont dans le *pack-test* de symfony.
+
 ## Outils existants
+
+
 
 ### Rapide comparatif
 
 ### Utilisation de PHPUnit
 
-Expliquer le concept du crawler et du "navigateur" embarqué pour simuler
+Symfony s’intègre à une bibliothèque indépendante appelée [PHPUnit](https://phpunit.de/) pour vous fournir un cadre de test complet. Vous pouvez consulter la [documentation très complète de PHPUnit](https://phpunit.readthedocs.io/en/8.0/), dont il existe une version française plutôt bien maintenue à jour.
 
 ## Cas Pratique
 
@@ -132,7 +147,9 @@ class DefaultControllerTest extends WebTestCase
 }
 ````
 
-Dans l'exemple ci-dessous, on execute un test (une méthode) et deux assertions (deux vérifications dans la même méthode (200 et le contenu de la balise H1).
+Dans l'exemple ci-dessous, on execute un test (une méthode) et deux assertions (deux vérifications dans la même méthode (la réponse est égale à 200 et le contenu de la balise H1).
+
+La méthode request() retourne un Crawler, qui est un object contenant, entre autre, la réponse du navigateur. Il est possible de naviguer avec le crawler dans la page afin de détecter un élément (une balise), des liens ou encore un formulaire.
 
 ### Les autres tests à mettre en place
 
