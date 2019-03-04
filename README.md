@@ -153,11 +153,19 @@ La méthode request() retourne un Crawler, qui est un object contenant, entre au
 
 ### Les autres tests à mettre en place
 
-Ecrivez les différents tests afin de vérifier que toutes vos pages sont accessibles.
+Ecrivez les différents tests afin de vérifier que toutes vos pages sont accessibles. **On ne testera que les URLs dans ce premier exercice.**
 
 ## Tester les liens
 
 ### Théorie
+
+Pour tester les liens contenus dans une page, il faut :
+
+1. Executer une requète pour accéder à la page
+2. Obtenir le Crawler associé afin de la parcourir
+3. Parcourir le Crawler à la recherche de votre élément
+4. Simuler le click
+5. Regarder la réponse obtenue et la comparer si besoin
 
 ### Cas pratique
 
