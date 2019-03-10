@@ -390,7 +390,9 @@ Il est possible de redéfinir la variable de connexion des fichiers .env (DATABA
 
 Dans ce fichier vous pouvez configurer les tests à effectuer, le paramétrage de votre aplication, et donc l'accès à une base de données de tests. Si PHPUnit trouve une ligne de connexion dans ce fichier il ignaurera les informations de votre fichier .env (ou .env.local)
 
-Il vous faudra aussi définir un fichier .env.test (à partir de la version 4.2), qui contiendra cette configuration de test. Cela permettra de disposer de deux bases de données. Une pour le mode de développement (ou production) et une pour les tests
+Il vous faudra aussi définir un fichier .env.test (à partir de la version 4.2), qui contiendra cette configuration de test. Cela permettra de disposer de deux bases de données. Une pour le mode de développement (ou production) et une pour les tests.
+
+[https://symfony.com/doc/current/testing/database.html](https://symfony.com/doc/current/testing/database.html)
 
 #### Le fichier phpunit.xml
 
