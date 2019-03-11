@@ -87,6 +87,44 @@ L'apparence n'a pas d'importance et fera l'objet d'un TP autour de Webpack-Encor
 
 Récupérer le projet, configurer la base de donner, créer la table et les tables, ajouter quelques données. On pourrait écrire des fixtures afin de peupler la base de données avec des données fivtives [Documentation sur les fixtures](https://symfony.com/doc/2.0/bundles/DoctrineFixturesBundle/index.html).
 
+Téléchargement du projet :
+
+En vous placant dans votre répertoire www ou public_html :
+
+````
+git clone https://github.com/Dannebicque/dutafLP.git
+
+cd dutafLP/
+````
+
+Mettre à jour le fichier .env, en le dupliquant .env.local et en adaptant vos informations.
+
+Installer les vendors :
+
+````
+composer install
+````
+
+Installer la base de données
+
+````
+bin/console doctrine:database:create
+bin/console make:migrations
+bin/console doctrine:make:migration
+````
+
+Tester le site :
+
+[http://localhost/dutafLP/public/index.php/](http://localhost/dutafLP/public/index.php/)
+
+Adapter l'URL selon votre configuration.
+
+Vous pouvez avoir les articles ou les fournisseurs avec les URL suivantes :
+
+[http://localhost/dutafLP/public/index.php/article/](http://localhost/dutafLP/public/index.php/article/)
+[http://localhost/dutafLP/public/index.php/fournisseur/](http://localhost/dutafLP/public/index.php/fournisseur/)
+
+
 ### Application au projet de démonstration
 
 Installation des éléments pour les tests (dont PHPUnit)
