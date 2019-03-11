@@ -107,22 +107,42 @@ Le processus pourrait par exemple être le suivant :
 2. Executer les fixtures,
 3. Executer les tests.
 
+Exemple d'un fichier test.sh
+
 ````
 echo "Mise à jour de la base de données"
 bin/console doctrine:schema:update -f --env=test
 echo "Chargement des fixtures"
-bin/console doctrine:load:fixtures --env=test
+bin/console doctrine:fixtures:load --env=test
 echo "Execution des tests"
 bin/phpunit
+````
+
+Libre à vous de le nommer, de l'adapter à vos besoins.
+
+L'execution se fera avec la commande
+
+````
+./test.sh
 ````
 
 ## Comment mettre en place une sécurité dans Symfony
 
 ### Rappels sur la partie sécurité de Symfony
 
+La sécurité est expliqué dans la partie du cours sur Symfony [Sécurité avec Symfony](https://github.com/Dannebicque/symfony-lp/blob/master/securite.md)
+
 ### Mise en place sur notre exemple
 
+1. Mettre en place la sécurité sur notre projet. Sécuriser les "CRUD" pour articles et fournisseurs.
+2. Executez vos tests... Que se passe-t-il ?
+3. Créer une fixture afin d'avoir des utilisateurs pour nos tests.
+
 ## Comment tester la partie sécurisée avec PHPUnit.
+
+Il n'est maintenant plus possible de tester la partie article ou fournisseur, car elles impliquent un accès sécurisé.
+
+Il va donc falloir émuler un utilisateur existant (d'où l'intéret des fixtures) et naviger avec lui. De cette manière, il sera authentifié et authorisé et pouura accéder aux pages.
 
 ## Les concepts de l'injection de dépendance.
 
