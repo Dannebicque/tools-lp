@@ -155,6 +155,13 @@ Dans l'exemple ci-dessous, on execute un test (une méthode) et deux assertions 
 
 La méthode request() retourne un **crawler** (*robot*), qui est un object contenant, entre autre, la réponse du navigateur. 
 
+Pour executer le test, il faut lancer PHPUnit :
+
+````
+bin/phpunit
+````
+
+Si tout se passe bien, vous devriez avoir 1 test, avec 2 assertions.
 
 ### Les autres tests à mettre en place
 
