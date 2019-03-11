@@ -14,7 +14,108 @@ Nous allons donc voir dans cet partie du cours :
 6. Les tests unitaires pour valider nos classes et leurs méthodes.
 
 ## Comment écrire des fixtures
+
+### Principes
+
+Les fixtures sont du code PHP qui permet d'insérer des données dans la base de données sans devoir utiliser PHPMyAdmin, des requètes SQL ou des formulaires. On utilise des fixtures pour alimenter son site lors des phases de développement (pour éviter de les saisir manuellement, et parce que l'on peut facilement générer une grande masse de données), pour effectuer des tests, ou éventuellement pour "initialiser" un site lors de sa mise en production (même si on preférera un script d'installation dans ce contexte).
+
+L'execution des fixtures à pour effet d'effacer le contenu de votre base de données.
+
+Pour utiliser les fixtures, il faut installer le bundle doctrine-fixture.
+
+````
+composer require orm-fixtures --dev   
+````
+
+Ensuite, il est possible d'utiliser la console et le "maker" pour construire la structure des fichiers de fixtures.
+
+````
+bin/console make:fixtures
+````
+
+Cela vous permet d'obtenir un fichier comme ci-dessous :
+
+````
+<?php
+
+namespace App\DataFixtures;
+
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Persistence\ObjectManager;
+
+class AppFixtures extends Fixture
+{
+    public function load(ObjectManager $manager)
+    {
+        // $product = new Product();
+        // $manager->persist($product);
+
+        $manager->flush();
+    }
+}
+````
+
+Pour executer les fixtures il faudra écrire la ligne suivante :
+
+````
+bin/console doctrine:fixtures:load 
+````
+
+Toutes les fixtures (classes et méthodes) seront executées.
+
+### Exemple concret
+
+La fixture ci-dessous permet de créer un fournisseur.
+
+````
+<?php
+
+namespace App\DataFixtures;
+
+use App\Entity\Fournisseur;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Persistence\ObjectManager;
+
+class AppFixtures extends Fixture
+{
+    public function load(ObjectManager $manager)
+    {
+        $fournisseur = new Fournisseur();
+        $fournisseur->setTelephone('0123456789');
+        $fournisseur->setNom('Fournisseur 1');
+        $fournisseur->setVille('Troyes');
+
+        $manager->persist($fournisseur);
+
+        $manager->flush();
+    }
+}
+````
+
+### Application
+
+ * Ecrire des fixtures pour créer 3 fournisseurs (on supprimer le second avec nos tests)
+ * Ecire des fixtures pour créer 2 articles pour le fournisseur 1.
+ 
 ## Comment écrire un script pour automatiser les tests
+
+Il est possible d'écrire un cours script "bash" ou "shell" par exemple afin d'automatiser notre processus de tests.
+
+Le processus pourrait par exemple être le suivant :
+
+1. Mettre à jour la base de données de tests,
+2. Executer les fixtures,
+3. Executer les tests.
+
+````
+echo "Mise à jour de la base de données"
+bin/console doctrine:schema:update -f --env=test
+echo "Chargement des fixtures"
+bin/console doctrine:load:fixtures --env=test
+echo "Execution des tests"
+bin/phpunit
+````
+
 ## Comment mettre en place une sécurité dans Symfony
 
 ### Rappels sur la partie sécurité de Symfony
