@@ -113,7 +113,7 @@ Exemple d'un fichier test.sh
 echo "Mise à jour de la base de données"
 bin/console doctrine:schema:update -f --env=test
 echo "Chargement des fixtures"
-bin/console doctrine:fixtures:load --env=test
+bin/console doctrine:fixtures:load --env=test --purge-with-truncate
 echo "Execution des tests"
 bin/phpunit
 ````
@@ -144,10 +144,66 @@ Il n'est maintenant plus possible de tester la partie article ou fournisseur, ca
 
 Il va donc falloir émuler un utilisateur existant (d'où l'intéret des fixtures) et naviger avec lui. De cette manière, il sera authentifié et authorisé et pouura accéder aux pages.
 
+Il existe globalement deux approches :
+
+* Avoir une configuration avec une authentification HTTP (le login et le password sont dans ce cas dans le fichier security.yaml). Cette configuration ne servant que pour la phase de tests.
+* Simuler une authentification en créant le token qui simule une authentification réussie.
+
+La première solution est rapide et permet de faire des tests simples, qui n'impliquent pas de récupérer des informations sur les usagers. La seconde solution est également simple, mis implique de générer le token dans chaque classe de tests. Cette méthode permet de récupérer les informations des utilisateurs. Couplée avec les fixtures elle est relativement simple à mettre en place, et peu gourmande en ressource.
+
+*Si vous utilisez une solution d'authentification via OAuth, il serait préférable d'avoir une solution alternative pour les tests. En effet les tests impliquant une vérification avec OAuth sont très gourmand en ressources et vont ralentir considérablement la phase de tests.*
+
+### Simulation du token
+
+Il va falloir modifier notre classe de test pour que celle ci générer un token, sauvegarde les éléments en session et dans un cookie afin de pouvoir exploiter la sécurité de symfony et récupérer un User connecté.
+
+Pour cela, on peut procéder de la manière suivante :
+
+````
+private $client = null;
+
+public function setUp()
+{
+    $this->client = static::createClient();
+}
+````
+
+Ecrire la méthode setUp(), qui est executée avant vos tests. Dans cette méthode on instancie le client.
+
+Ensuite, si toutes les méthodes de cette classe impliquent une authentification, il est possible d'écrire le code suivant à la suite, dasn la méthode setUp(). Sinon, on peut créer une méthode private qui va être appelée uniquement sur les tests nécessitant une authentificaiton.
+
+````
+ $session = $this->client->getContainer()->get('session');
+
+$firewallName = 'main'; //nom de votre firewall (voir security.yaml)
+$firewallContext = 'main';
+
+//création du toekn
+$token = new UsernamePasswordToken('test@mail.com', 'test', 'main', ['ROLE_ADMIN']);
+$session->set('_security_main', serialize($token));
+$session->save();
+
+$cookie = new Cookie($session->getName(), $session->getId());
+$this->client->getCookieJar()->set($cookie);
+````
+
+L'objet UsernamePasswordToken prend 4 paramètres :
+* Le login (username ou mail selon votre configuration)
+* le password
+* le nom du firewall
+* le rôle de l'utilisateur
+
+A ce stade l'utilisateur n'est pas obligé d'exister dans votre base de données, et les données peuvent donc être totalement fictives.
+
+### Mise en place sur notre exemple
+
+Modifier vos tests afin de pouvoir accéder aux URL des parties sécurisées.
+
 ## Les concepts de l'injection de dépendance.
 
 ### Concepts de l'Injection de dépendances
-### Ecire une classe de traitement
+
+### Ecrire une classe de traitement
 
 ## Les tests unitaires pour valider nos classes et leurs méthodes.
 
