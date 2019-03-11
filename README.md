@@ -121,7 +121,7 @@ Adapter l'URL selon votre configuration.
 
 Vous pouvez avoir les articles ou les fournisseurs avec les URL suivantes :
 
-[http://localhost/dutafLP/public/index.php/article/](http://localhost/dutafLP/public/index.php/article/)
+[http://localhost/dutafLP/public/index.php/article/](http://localhost/dutafLP/public/index.php/article/) et 
 [http://localhost/dutafLP/public/index.php/fournisseur/](http://localhost/dutafLP/public/index.php/fournisseur/)
 
 
