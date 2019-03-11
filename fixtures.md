@@ -1,4 +1,4 @@
-# Professionnaliser ses tests
+# Professionnaliser les tests
 
 Les exemples de la séance précédente peuvent présenter des défauts. En effet, lors de l'affiche de listes, rien ne nous garanti que le contenu de la base de données contient des données. De la même manière, supprimer ou éditer un élément se fait en supposant qu'il existe dans la base de données. Si ce n'est pas le cas le test ne fonctionnera pas et lévera une erreur. Une erreur qui n'est pas du à votre code, mais à l'absence de données.
 
