@@ -199,14 +199,127 @@ A ce stade l'utilisateur n'est pas obligé d'exister dans votre base de données
 
 Modifier vos tests afin de pouvoir accéder aux URL des parties sécurisées.
 
-## Les concepts de l'injection de dépendance.
+## Les concepts de l'injection de dépendance (*dependency injection* en anglais).
 
 ### Concepts de l'Injection de dépendances
 
+``
+Il consiste à créer dynamiquement (injecter) les dépendances entre les différents objets en s'appuyant sur une description (fichier de configuration ou métadonnées) ou de manière programmatique. Ainsi les dépendances entre composants logiciels ne sont plus exprimées dans le code de manière statique mais déterminées dynamiquement à l'exécution.
+``
+
+Ce concept existe depuis toujours dans Symfony, mais était complexe à mettre en oeuvre dans SF2 et SF3 (<3.3). Comme l'indique la définition, il fallait passer par un fichier de configuration pour l'exploiter et définir les liens existants.
+
+Aujourd'hui avec SF 4 (et >3.4), ce concept est quasiment transparent dans son utilisation, et semble naturel lorsque l'on le découvre avec SF4. Vous avez déjà écrit de l'injection de dépendance depuis le début du module en LP.
+
+Par exemple :
+
+````
+public function index(ArticleRepository $articleRepository)
+````
+
+Est une méthode qui utilise l'injection de dépendance. Article Repository est injecté dynamiquement dans la méthode. Vous ne passez pas cet élement dans votre appel de la méthode. Ce concept est très pratique et permet d'alléger le code (mais augmente le nombre de paramètres de vos méthodes).
+
+Ce comportement fonctionne parce que dans Symfony( SF>3.3), toutes les classes contenues dans src/ peuvent être injectées. C'est ce que décrit le fichier services.yaml
+
+````
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+````
+
+Grâce à l'autowiring, il n'est plus nécessaire de décrire le comportement de l'injection de dépendance, et il est défini de manière automatique (et systèmatique) pour toutes les classes de src.
+
+*Notez que Entity est exclus, pour autant on peut utiliser Article dans les paramètres d'une méthode. Dans ce cas précis, on utiliser la notion de ParamConverters et pas d'injection de dépendance*
+
+De ce fait, il est possible d'écrire nos propres classes et de les utiliser en les injectants dans les méthodes qui en ont besoin.
+
 ### Ecrire une classe de traitement
+
+Ecrivons par exemple une classe qui va calculer un tarif TTC à partir d'un prix HT.
+
+On pourrait définir une classe dans un répertoire nommé Classes dans le répertoire src. Par défaut, puisqu'il se trouve dans src, il sera automatiquement injectable dans n'importe qu'elle méthode.
+
+Cette classe contiendra par exemple une méthode pour calculer le montant TTC à partir d'un prix HT.
+Et on peut imaginer utiliser cette méthode dans la méthode "show" de article, afin d'enviyer à la vue le prix TTC du produit.
+
+**Oui ! Ca ne sert à rien ! Mais pour l'exercice... On pourrait effectuer ce clacul au niveau de l'entité en ajoutant une méthode.**
+
+Pour résumer on aurait :
+
+````
+namespace App\Classes;
+
+
+class Calculs
+{
+    const TVA = 19.6;
+
+    public function calculTTC($prixHT) {
+        return $prixHT + ($prixHT * self::TVA / 100);
+    }
+}
+````
+
+Et pour l'injection de dépendance dans la méthode show :
+
+````
+public function show(Calculs $calculs, Article $article): Response
+````
+
+
+### Pour s'amuser
+
+Ajotuer une méthode dans la classe calcul qui calcul le prix TTC du stock pour un article donné. (on passera en paramètre la quantité et le prix de l'article)
+
+**Oui ! La uassi on pourrait le faire directement dans l'entité de manière plus judicieuse.**
 
 ## Les tests unitaires pour valider nos classes et leurs méthodes.
 
 ### Concepts
 
+Un test unitaire permet de tester individuellement les méthodes d'une classe, afin de s'assurer de la cohérence du résultat. Les tests sont effectués de manière déconnecté du contexte (pas dans un contexte de navigation, sns connexion, dans données issues de la BDD, ...)
+
+L'exemple ci-dessous est un test permettant de vérifier la méthode calculTTC décrite précédemment.
+
+````
+<?php
+
+namespace App\Tests;
+
+use App\Classes\Calculs;
+use PHPUnit\Framework\TestCase;
+
+class CalculTest extends TestCase
+{
+    public function testPrixTTC()
+    {
+        $calcul = new Calculs();
+        $prixTTC = $calcul->calculTTC(10);
+        $this->assertEquals(11.96,$prixTTC);
+    }
+}
+````
+
+Le principe consite à charger la classe, éxecuter la méthode à tester en passant des valeurs fictives, et comparer le résultat obtenu avec le résultat attendu. Il est possible d'exprimer d'autres tests qu'une égalité.
+
 ### Tester notre classe.
+
+Ecire le teste qui permet de vérifier la méthode que vous avez écrit.
+
+
+## Finaliser le projet
+
+Une fois l'ensemble des concepts compris, vous veillerez à terminer la mise en place des tests sur l'ensemble de votre projet.
+
+
+* Sécuritsation des parties aritcles et fournisseurs.
+* Fixtures pour articles, fournissuers et user
+* Tests de toutes les URL et fonctionnalités du site.
