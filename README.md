@@ -3,5 +3,7 @@ Cours sur les outils pour le développement back pour les LP DEV (IUT de Troyes)
 
 # Organisation
 
-* Séance 1 : (phpunit.md)[PHPUnit]
-* Séance 2 : (fixtures.md)[Fixtures et Sécurité]
+* Séance 1 : [PHPUnit](phpunit.md)
+* Séance 2 : [Fixtures et Sécurité](fixtures.md)
+* Séance 3 : []()
+* Séance 4 : [Webpack et Symfony](webpack.md)
