@@ -279,7 +279,7 @@ public function show(Calculs $calculs, Article $article): Response
 
 Ajotuer une méthode dans la classe calcul qui calcul le prix TTC du stock pour un article donné. (on passera en paramètre la quantité et le prix de l'article)
 
-**Oui ! La uassi on pourrait le faire directement dans l'entité de manière plus judicieuse.**
+**Oui ! La aassi on pourrait le faire directement dans l'entité de manière plus judicieuse.**
 
 ## Les tests unitaires pour valider nos classes et leurs méthodes.
 
@@ -319,7 +319,6 @@ Ecire le teste qui permet de vérifier la méthode que vous avez écrit.
 
 Une fois l'ensemble des concepts compris, vous veillerez à terminer la mise en place des tests sur l'ensemble de votre projet.
 
-
 * Sécuritsation des parties aritcles et fournisseurs.
-* Fixtures pour articles, fournissuers et user
+* Fixtures pour articles, fournisseurs et user
 * Tests de toutes les URL et fonctionnalités du site.
