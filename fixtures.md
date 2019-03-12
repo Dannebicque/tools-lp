@@ -316,6 +316,8 @@ Ecire le teste qui permet de vérifier la méthode que vous avez écrit.
 
 ## Pour aller plus loin
 
+[https://afup.org/talks/2260-ecrire-des-tests-pour-le-long-terme](https://afup.org/talks/2260-ecrire-des-tests-pour-le-long-terme) => Vidéo à voir sur les tests, leur nommage, leur évolution
+
 [https://afsy.fr/avent/2017/18-structurer-sa-demarche-de-test](https://afsy.fr/avent/2017/18-structurer-sa-demarche-de-test)
 [http://referentiel.institut-agile.fr/tdd.html](http://referentiel.institut-agile.fr/tdd.html)
 
