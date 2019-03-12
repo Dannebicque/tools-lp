@@ -314,6 +314,10 @@ Le principe consite à charger la classe, éxecuter la méthode à tester en pas
 
 Ecire le teste qui permet de vérifier la méthode que vous avez écrit.
 
+## Pour aller plus loin
+
+[https://afsy.fr/avent/2017/18-structurer-sa-demarche-de-test](https://afsy.fr/avent/2017/18-structurer-sa-demarche-de-test)
+[http://referentiel.institut-agile.fr/tdd.html](http://referentiel.institut-agile.fr/tdd.html)
 
 ## Finaliser le projet
 
