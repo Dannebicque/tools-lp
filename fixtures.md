@@ -111,7 +111,8 @@ Exemple d'un fichier test.sh
 
 ````
 echo "Mise à jour de la base de données"
-bin/console doctrine:schema:update -f --env=test
+bin/console doctrine:schema:drop --env=test --force
+bin/console doctrine:schema:create --env=test
 echo "Chargement des fixtures"
 bin/console doctrine:fixtures:load --env=test --purge-with-truncate
 echo "Execution des tests"
