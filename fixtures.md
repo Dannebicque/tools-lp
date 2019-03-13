@@ -114,7 +114,7 @@ echo "Mise à jour de la base de données"
 bin/console doctrine:schema:drop --env=test --force
 bin/console doctrine:schema:create --env=test
 echo "Chargement des fixtures"
-bin/console doctrine:fixtures:load --env=test --purge-with-truncate
+bin/console doctrine:fixtures:load --env=test
 echo "Execution des tests"
 bin/phpunit
 ````
