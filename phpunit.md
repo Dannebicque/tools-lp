@@ -130,7 +130,7 @@ Vous pouvez avoir les articles ou les fournisseurs avec les URL suivantes :
 Installation des éléments pour les tests (dont PHPUnit)
 
 ````
-composer require test-pack
+composer require test-pack --dev
 ````
 
 Tous les fichiers de tests doivent êtres écrits dans le répertoire "tests/" de votre projet.
