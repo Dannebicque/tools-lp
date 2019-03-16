@@ -470,9 +470,3 @@ Vous pouvez vous faire un script qui avant chaque phase de test :
 3. Ajoute les tables
 4. Execute éventuellement les fixtures
 5. Execute PHPUnit
-
-## Tests Unitaires
-
-### Théorie
-
-### Cas pratique
