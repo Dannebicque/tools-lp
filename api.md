@@ -79,7 +79,7 @@ On peut utiliser l'interface proposée par API Platform pour regarder le comport
 4. http://votrprojet/public/index.php/api/fournisseurs
 5. Regardez la réponse proposée par API Platform
 
-Par défaut, API Platform propose un format enrichi du JSON (LD+Json), qui contient des informations supplémentaires : 
+Par défaut, API Platform propose un format enrichi du JSON ([Json-LD](https://json-ld.org/)), qui contient des informations supplémentaires : 
 
 ````
 {
