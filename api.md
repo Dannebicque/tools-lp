@@ -68,3 +68,56 @@ Sans aucune autre configuration, vous avez une API qui permet de manipuler votre
 Vous pouvez lister les fournisseurs, en ajouter un, en modifier, ou en supprimer, ou encore avoir le détail d'un enregistrement précis.
 
 ![exemple du résultat](api_fournisseur.png)
+
+### Test une API avec POSTMAN
+
+On peut utiliser l'interface proposée par API Platform pour regarder le comportement de notre API. On peut aussi, afin d'avoir un comportement plus proche d'un appel "front" utiliser l'instruction CURL en ligne de commande, ou enfin, utiliser un outil comme [Postman](https://www.getpostman.com/) qui permet de faire des appels comme le ferait notre interface front. Cet outil est très pratique pour déterminer la structure des URL et des données à fournir, ou des données récupèrée.
+
+1. [Téléchargez et installer PostMan](https://www.getpostman.com/downloads/)
+2. Un compte est nécessaire.
+3. Lancez Postman et executez une première requête
+4. http://votrprojet/public/index.php/api/fournisseurs
+5. Regardez la réponse proposée par API Platform
+
+Par défaut, API Platform propose un format enrichi du JSON (LD+Json), qui contient des informations supplémentaires : 
+
+````
+{
+    "@context": "/dutaflp/public/index.php/api/contexts/Fournisseur",
+    "@id": "/dutaflp/public/index.php/api/fournisseurs",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "/dutaflp/public/index.php/api/fournisseurs/1",
+            "@type": "Fournisseur",
+            "id": 1,
+            "nom": "Four 1",
+            "telephone": "0987654321",
+            "ville": "Troyes",
+            "articles": []
+        },
+        {
+            "@id": "/dutaflp/public/index.php/api/fournisseurs/2",
+            "@type": "Fournisseur",
+            "id": 2,
+            "nom": "Amazon",
+            "telephone": "0987678909",
+            "ville": "Paris",
+            "articles": []
+        }
+    ],
+    "hydra:totalItems": 2
+}
+````
+
+### A vous de jouer
+
+Testez depuis Postman : 
+
+* l'URL pour obtenir les informations d'un fournisseur, 
+* l'URL pour ajouter un fournisseur
+* l'URL pour modifier un fournisseur.
+
+### A vous de jouer encore
+
+Ajoutez les entités User et Article dans Api Platform.
