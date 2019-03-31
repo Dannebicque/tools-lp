@@ -121,3 +121,34 @@ Testez depuis Postman :
 ### A vous de jouer encore
 
 Ajoutez les entités User et Article dans Api Platform.
+
+## Faire des requêtes AJAX avec Symfony
+
+### Principes
+Executer un appel avec AJAX depuis le front est en fait très simple et ne change pas particulièrement lorsque l'on utilise Symfony. En effet Symfony permet uniquement d'envoyer des données depuis le serveur vers le front.
+
+La difficulté peut provenir de l'URL à utiliser lors de l'appel. Plusieurs solutions peuvent exister :
+
+* Utiliser l'instruction TWIG : path, si le code javascript est dans un fichier twig.
+* Utiliser une URL (absolue ou relative) dans du code javascript
+* Utiliser un bundle permettant de manipuler les noms des routes depuis du javascript : [FOSJsRouting](https://symfony.com/doc/master/bundles/FOSJsRoutingBundle/index.html)
+
+### Première requête
+
+On peut écrire par exemple le code ci-dessous, sur la page d'index pour obtenir la liste des fournisseurs.
+
+````
+<script>
+$(document).ready(function(){
+    $.ajax({
+      url: 'api/fournisseurs',
+      success: function (data) {
+        console.log(data)
+      }
+    })
+})
+</script>
+````
+
+Le résultat s'affiche dans la console.
+
