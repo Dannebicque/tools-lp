@@ -67,4 +67,4 @@ Rechargez votre navigateur, et voilà !
 Sans aucune autre configuration, vous avez une API qui permet de manipuler votre entité Fournisseur. 
 Vous pouvez lister les fournisseurs, en ajouter un, en modifier, ou en supprimer, ou encore avoir le détail d'un enregistrement précis.
 
-![exemple du résultat](api_fournisseur)
+![exemple du résultat](api_fournisseur.png)
