@@ -154,5 +154,9 @@ Le résultat s'affiche dans la console.
 
 ### A vous de jouer
 
-Ecrire un code qui permet d'afficher les détails d'un fournisseur dans la page index des fournisseurs avec un appel AJAX uniquement (sans rechargement).
+En vous basant sur API plateforme, écrire une page simple, qui permet de lister, ajouter et voir le détail des fournisseurs en utilisant jquery (ou éventuellement un framework front que vous maitrisez, la partie front peut être en dehors d'un projet Symfony).
+
+## API et ressources liées
+
+gestion de article avec le lien vers le fournisseur
 
