@@ -156,7 +156,3 @@ Le résultat s'affiche dans la console.
 
 En vous basant sur API plateforme, écrire une page simple, qui permet de lister, ajouter et voir le détail des fournisseurs en utilisant jquery (ou éventuellement un framework front que vous maitrisez, la partie front peut être en dehors d'un projet Symfony).
 
-## API et ressources liées
-
-gestion de article avec le lien vers le fournisseur
-
