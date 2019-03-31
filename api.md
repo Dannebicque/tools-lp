@@ -141,7 +141,7 @@ On peut écrire par exemple le code ci-dessous, sur la page d'index pour obtenir
 <script>
 $(document).ready(function(){
     $.ajax({
-      url: 'api/fournisseurs',
+      url: 'http://localhost:8888/dutaflp/public/index.php/api/fournisseurs',
       success: function (data) {
         console.log(data)
       }
@@ -151,4 +151,8 @@ $(document).ready(function(){
 ````
 
 Le résultat s'affiche dans la console.
+
+### A vous de jouer
+
+Ecrire un code qui permet d'afficher les détails d'un fournisseur dans la page index des fournisseurs avec un appel AJAX uniquement (sans rechargement).
 
