@@ -1,3 +1,9 @@
+# Formulaires dynamiques avec Symfony
+
+Il est fréquent d'avoir besoin de lier plusieurs éléments d'un formulaire. Par exemple proposer des villes en fonction d'une région ou d'un code postal. Naturellement pour réaliser ce type de mécanisme vous devriez mettre en place des appels en javascript pour actualiser les élements en fonction des autres.
+
+Ce besoin étant récurrent dans les interfaces, Symfony l'intégre en mettant en place un système d'événements qui peuvent se déclencher et mettre à jour le formulaire. Vous trouverez la [documentation complète ici](https://symfony.com/doc/current/form/dynamic_form_modification.html).
+
 # API Rest et "AJAX"
 
 Cette partie a pour objectif de voir la mise en place d'un système d'API Rest sur un projet Symfony, ainsi que la 
