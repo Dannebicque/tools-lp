@@ -4,6 +4,19 @@ Il est fréquent d'avoir besoin de lier plusieurs éléments d'un formulaire. Pa
 
 Ce besoin étant récurrent dans les interfaces, Symfony l'intégre en mettant en place un système d'événements qui peuvent se déclencher et mettre à jour le formulaire. Vous trouverez la [documentation complète ici](https://symfony.com/doc/current/form/dynamic_form_modification.html).
 
+Pour cela on va manipuler les Events des formulaires. Il en existe plusieurs :
+
+* PRE_SET_DATA
+* POST_SET_DATA
+* PRE_SUBMIT
+* SUBMIT
+* POST_SUBMIT
+
+Le principe de fonctionnement est le suivant :
+
+A chaque changement du select des régions, le formulaire est soumis à Symfony (de manière automatique et transparente).
+Cette opération va récupérer les éléments associés à la Région et les renvoyer afin de mettre à jour le select des villes.
+
 # API Rest et "AJAX"
 
 Cette partie a pour objectif de voir la mise en place d'un système d'API Rest sur un projet Symfony, ainsi que la 
