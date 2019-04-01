@@ -175,3 +175,7 @@ Le résultat s'affiche dans la console.
 
 En vous basant sur API plateforme, écrire une page simple, qui permet de lister, ajouter et voir le détail des fournisseurs en utilisant jquery (ou éventuellement un framework front que vous maitrisez, la partie front peut être en dehors d'un projet Symfony).
 
+
+## A lire
+
+Une présentation faite lors du SymfonyCon de Paris : [https://dunglas.fr/2019/03/symfonylive-paris-slides-symfony-on-steroids%e2%80%a8-vue-js-mercure-panther/](https://dunglas.fr/2019/03/symfonylive-paris-slides-symfony-on-steroids%e2%80%a8-vue-js-mercure-panther/) sur l'intégration de Symfony, VueJs et mercure afin de rendre vos applications plus intéractives avec une base Symfony.
