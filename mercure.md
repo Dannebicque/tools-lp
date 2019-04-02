@@ -17,3 +17,108 @@ notifications push vers des navigateurs ou des clients connectés.
 Cela va permettre d'avoir des applications temps-réels et une mise à jour des clients de manière rapide, fiable et 
 (relativement) simple.
 
+## Installer Mercure
+
+Rendez-vous sur [GitHub](https://github.com/dunglas/mercure/releases) pour récupérer la dernière version de Mercure selon votre OS.
+
+Pour les utilisateurs de Windows, il exsite l'executable. Pour linux les dépendances nécessaires. Dans tous les cas vous avez les sources que vous pouvez compiler pour obtenir le fichier "mercure" executable.
+
+*Nota* Pour les utilisateurs de MacOs, il faut installer Go (le langage de programmation), [avec Brew par exemple](http://sourabhbajaj.com/mac-setup/Go/README.html), et ensuite compiler les sources :
+
+````
+git clone https://github.com/dunglas/mercure
+cd mercure
+GO111MODULE=on go get
+GO111MODULE=on go build
+````
+
+## Executer Mercure
+
+Mercure est un petit service qui doit tourner sur votre serveur (comme un node par exemple). Pour cela vous devez executer la commande suivante :
+
+````
+ JWT_KEY='aVerySecretKey' ADDR='localhost:3000' ALLOW_ANONYMOUS=1 CORS_ALLOWED_ORIGINS=* ./mercure
+````
+
+n'oubliez pas de mettre à jour le chemin de votre executable, et idéalement de mettre une vrai clé pour le JWT token. Par défaut avec cette ligne, le serveur mercure sera accessible sur l'adresse  [http://localhost:3000](http://localhost:3000). Vous pouvez vous rendre sur cette page, vous devriez voIR :
+
+**Welcome to Mercure!**
+
+## Tester Mercure
+
+Il est possible de tester mercure assez rapide, en tout cas de s'assurer qu'il peut communiquer. On va donc envoyer une requète au serveur mercure et observer la réponse.
+
+Pour cela il faut envoyer une requête à l'adresse http://localhost:3000/hub, avec une méthode **POST**.
+
+On va utiliser PostMan une nouvelle fois pour ce test.
+
+Saisir l'adresse et la méthode. Pour que Mercure fonctionne, on doit générer un token avec JWT. On se rend sur [jwt.io](https://jwt.io/) pour générer ce token.
+
+On va mettre dans la partie **PAYLOAD**
+
+````
+{
+  "mercure": {
+  "publish": ["*"]
+  }
+}
+````
+
+L'étoile dans publish permet de dire qu'on envoie à tout le monde. 
+
+Dans la partie **VERIFY SIGNATURE** vous devez inscrire la clé utilisée avec Mercure (aVerySecretKey dans l'exemple ci-dessus).
+
+Et vous pouvez récupérer le token dans la partie de gauche de JWT.io.
+Dans l'onglet "authorization" de Postman, vous devez coller dans la case token, le token généré par JWT. 
+Dans la partie "body", en choisissant "x-www-form-urlencoded" vous pouvez ajouter les éléments à envoyer.
+
+* le champ topic (obligatoire) avec comme valeur, normalement une URL (l'adresse du message à lire par Mercure, et pour laquelle les clients front pourront s'abonner). L'adresse n'a donc pas besoin de réellement exister à ce stade.
+* Un champ data avec une valeur au hasard pour s'assurer du bon fonctionnement.
+
+En cliquant sur "send" dans postman, vous devriez vous un code apparaitre dans body. Et dans la console executant mercure une nouvelle ligne, indiquant la mise à jour et l'arrivée d'un message.
+
+Et voilà ! Vous venez de faire votre premier échange avec Mercure.
+
+## Récupérer le message dans le front.
+
+Dans la partie front, il faut lui dire d'écouter le serveur Mercure, de s'abonner à des topics pour en recevoir les données à chaque "push".
+
+````
+<script>
+    const url = new URL('http://localhost:3000/hub'); //adresse de votre serveur mercure
+    url.searchParams.append('topic', 'http://monsite.com/ping'); //abonnement au topic (URL mise dans postman)
+    
+    const eventSource = new EventSource(url); //on déclenche l'écoute (non compatible IE et Edge)
+
+    eventSource.onmessage = e => console.log(e); // A chaque message envoyé à mercure, celui ci est diffusé à tous les clients écoutant
+</script>
+````
+
+Si vous envoyez de nouveau depuis postman la commande, vous devriez vous apparaître le message dans la console.
+
+````
+MessageEvent {isTrusted: true, data: "0", origin: "http://localhost:3000", lastEventId: "34df558d-95e7-4503-ae1a-3715d5a1771b", source: null, …}
+bubbles: false
+cancelBubble: false
+cancelable: false
+composed: false
+currentTarget: EventSource {url: "http://localhost:3000/hub?topic=http%3A%2F%2Fmonsite.com%2Fping", withCredentials: false, readyState: 1, onopen: null, onmessage: ƒ, …}
+data: "0"
+defaultPrevented: false
+eventPhase: 0
+isTrusted: true
+lastEventId: "34df558d-95e7-4503-ae1a-3715d5a1771b"
+origin: "http://localhost:3000"
+path: []
+ports: []
+returnValue: true
+source: null
+srcElement: EventSource {url: "http://localhost:3000/hub?topic=http%3A%2F%2Fmonsite.com%2Fping", withCredentials: false, readyState: 1, onopen: null, onmessage: ƒ, …}
+target: EventSource {url: "http://localhost:3000/hub?topic=http%3A%2F%2Fmonsite.com%2Fping", withCredentials: false, readyState: 1, onopen: null, onmessage: ƒ, …}
+timeStamp: 5445.229999982985
+type: "message"
+userActivation: null
+__proto__: MessageEvent
+````
+    
+    
