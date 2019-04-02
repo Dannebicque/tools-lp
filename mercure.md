@@ -178,8 +178,14 @@ L'objet Update prend 3 paramètres :
 * Les datas (au format JSON)
 * La cible (optionnel)
 
-## Authentifier le destinataire
-
-
 ## A vous de jouer
 
+Proposer une application (soit une nouvelle installation de Symfony, soit en complétant le projet en cours) qui permet d'avoir une salle de Tchat avec plusieurs utilisateurs.
+* Dans un premier temps on peut simplement considérer que tous les utilisateurs visualisent tous les messages (tchat public).
+* Ajouter une liste des personnes connectées
+
+## Authentifier le destinataire
+
+Le principe consiste à définir un cookie pour chaque session (dépendant par exemple de l'utilisateur connecté), puis de passer ce cookie dans les échanges afin d'authentifier le client.
+
+A venir...
