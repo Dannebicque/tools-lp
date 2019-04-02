@@ -2,6 +2,7 @@
 
 Le cours se base sur les supportd suivants :
 
+* [Documentation de Symfonu](https://symfony.com/doc/current/mercure.html)
 * [Repo d'une démonstration réalisée au SymfonyCon de Lisbonne et de Paris](https://github.com/dunglas/symfonycon-lisbon)
 * [Les slides associés](https://dunglas.fr/2019/03/symfonylive-paris-slides-symfony-on-steroids%e2%80%a8-vue-js-mercure-panther/)
 * [Tuto sur Grafikart](https://www.grafikart.fr/tutoriels/symfony-mercure-1151)
@@ -152,7 +153,7 @@ public function new(Publisher $publisher, Request $request): Response
         if ($form->isSubmitted() && $form->isValid()) {
             ...
             $update = new Update(
-                'http://example.com/fournisseur/1',//URL sur laquelle s'abonner
+                'http://example.com/fournisseur/1', //topic (URL) sur laquelle s'abonner
                 json_encode(['nom' => $fournisseur->getNom(),
                              'telephone' => $fournisseur->getTelephone(),
                              'ville' => $fournisseur->getVille(),
@@ -169,3 +170,16 @@ public function new(Publisher $publisher, Request $request): Response
        
     }
  ````
+
+
+L'objet Update prend 3 paramètres :
+
+* Le topic (sous forme d'URL)
+* Les datas (au format JSON)
+* La cible (optionnel)
+
+## Authentifier le destinataire
+
+
+## A vous de jouer
+
