@@ -120,5 +120,52 @@ type: "message"
 userActivation: null
 __proto__: MessageEvent
 ````
+
+Toutes les datas se trouvent dans data. On peut les récupérer dans un format JSON manipulation par le front en écrivant :
+
+````
+eventSource.onmessage = e => {
+    var datajson = JSON.parse(e.data)
+    console.log(datajson);
+}
+````
     
-    
+ ## Utilisation avec Symfony
+ 
+ Il faut installer un bundle pour utiliser Mercure avec Symfony, et pouvoir envoyer des notifications à Mercure, qui seront ensuites envoyées aux différents clients connectés.
+ 
+ ````
+ composer req mercure
+ ````
+ 
+ Il faut configurer le fichier .env avec l'URL du serveur mercure et le token (généré depuis JWT.io).
+ 
+ Le code est ensuite :
+ 
+ ````
+use Symfony\Component\Mercure\Publisher;
+use Symfony\Component\Mercure\Update;
+
+public function new(Publisher $publisher, Request $request): Response
+    {
+        ...
+        if ($form->isSubmitted() && $form->isValid()) {
+            ...
+            $update = new Update(
+                'http://example.com/fournisseur/1',//URL sur laquelle s'abonner
+                json_encode(['nom' => $fournisseur->getNom(),
+                             'telephone' => $fournisseur->getTelephone(),
+                             'ville' => $fournisseur->getVille(),
+                    ])
+            );
+
+            // The Publisher service is an invokable object
+            $publisher($update);
+
+            return $this->redirectToRoute('fournisseur_index');
+        }
+
+       ...
+       
+    }
+ ````
