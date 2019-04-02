@@ -141,6 +141,24 @@ Testez depuis Postman :
 
 Ajoutez les entités User et Article dans Api Platform.
 
+## Filtrer les opérations
+
+Par défaut, API Platform propose toutes les manipulations classiques d'un CRUD. Il est possible d'interdire des opérations ou d'en ajouter (opérations personnalisées).
+
+Pour interdire une opération, il faut, au niveau de l'entité, lister les opérations autorisées. Par exemple :
+
+````
+ * @ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"}
+ * )
+ 
+ */
+class Fournisseur
+````
+
+Cet exemple autorise, uniquement un accès GET sur la collection, autrement dit, la possibilité de récupérer tous les enregistrements, et un accès GET sur un item, autrement dit, récupérer toutes les informations d'un élémént précis.
+
 ## Faire des requêtes AJAX avec Symfony
 
 ### Principes
@@ -175,6 +193,17 @@ Le résultat s'affiche dans la console.
 
 En vous basant sur API plateforme, écrire une page simple, qui permet de lister, ajouter et voir le détail des fournisseurs en utilisant jquery (ou éventuellement un framework front que vous maitrisez, la partie front peut être en dehors d'un projet Symfony).
 
+## Outils proposés par API Platform
+
+API Platform propose de nombreuses manières de gérer la partie Front. 
+
+Notamment une administration auto-genérée, basée sur React (React-Admin), [https://api-platform.com/docs/admin/](https://api-platform.com/docs/admin/).
+
+Api Platform propose aussi des générateurs (qui vont produire le code et les fichiers associés) notamment pour les framework React et VueJs, mais aussi pour des applications mobiles (React Native) [https://api-platform.com/docs/client-generator/](https://api-platform.com/docs/client-generator/)
+
+### A vous de jouer
+
+Mettez en place l'administration à base de React-Admin pour notre projet.
 
 ## A lire
 
