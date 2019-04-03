@@ -41,7 +41,7 @@ Il faut créer 4 variables d'environnements :
 * JWT_KEY avec votre clé secrète
 * ADDR avec ":3000"
 * ALLOW_ANONYMOUS avec "1"
-* CORS_ALLOW_ORIGINS avec "*"
+* CORS_ALLOWED_ORIGINS avec "*"
 
 Puis executer uniquement **mercure** dans votre console.
 
