@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chat{% endblock %}
+
+{% block body %}
+    <h1>Bonjour {{ app.user.username }},</h1>
+    <div id="messages">
+        {% for message in messages %}
+        <p><strong>{{ message.user.username }}</strong> : {{ message.message }}. <i>{{ message.created|date('d/m/Y
+        H:i')
+                }}</i></p>
+        {% endfor %}
+    </div>
+    <div id="users"></div>
+    <div>
+        <textarea id="texte"></textarea>
+        <button id="btnEnvoyer">Envoyer</button>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+
+      const u = new URL('http://localhost:3000/hub');
+      u.searchParams.append('topic', 'http://chatlp.com/message');
+
+      const es = new EventSource(u);
+      es.onmessage = e => {
+        console.log('received')
+        var $data = JSON.parse(e.data);
+        var $html ="<p><strong>"+$data.username+"</strong> : "+$data.message+". <i>"+$data.created+"</i></p>";
+          $('#messages').append($html);
+      }
+
+      $(document).on('click', '#btnEnvoyer', function () {
+        $.ajax({
+          url: "{{ path('post_chat') }}",
+          data: {
+            texte: $('#texte').val()
+          },
+          method: 'POST'
+        })
+      })
+
+
+    </script>
+{% endblock %}
