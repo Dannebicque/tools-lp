@@ -24,6 +24,7 @@ Rendez-vous sur [GitHub](https://github.com/dunglas/mercure/releases) pour récu
 
 Pour les utilisateurs de Windows, il exsite l'executable. Pour linux les dépendances nécessaires. Dans tous les cas vous avez les sources que vous pouvez compiler pour obtenir le fichier "mercure" executable.
 
+### pour MacOS
 *Nota* Pour les utilisateurs de MacOs, il faut installer Go (le langage de programmation), [avec Brew par exemple](http://sourabhbajaj.com/mac-setup/Go/README.html), et ensuite compiler les sources :
 
 ````
@@ -32,6 +33,17 @@ cd mercure
 GO111MODULE=on go get
 GO111MODULE=on go build
 ````
+
+### Pour Windows
+
+Il faut créer 4 variables d'environnements :
+
+* JWT_KEY avec votre clé secrète
+* ADDR avec ":3000"
+* ALLOW_ANONYMOUS avec "1"
+* CORS_ALLOW_ORIGINS avec "*"
+
+Puis executer uniquement **mercure** dans votre console.
 
 ## Executer Mercure
 
