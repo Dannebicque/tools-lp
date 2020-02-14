@@ -59,7 +59,7 @@ Les tests fonctionnels vérifient l'intégration des différentes couches d'une 
 3. Tester la réponse;
 4. "Rincer" et répéter.
 
-Les tests unitaires nécessitent d'utiliser des bundles permettant de naviguer dans le code produit (des crawler), mais également permettant de "simuler" un navigateur (browser) afin de récuperer les réponses. Par défaut ces outils sont dans le *pack-test* de symfony.
+Les tests fonctionnels nécessitent d'utiliser des bundles permettant de naviguer dans le code produit (des crawler), mais également permettant de "simuler" un navigateur (browser) afin de récuperer les réponses. Par défaut ces outils sont dans le *pack-test* de symfony.
 
 ## Outils existants
 
@@ -109,8 +109,8 @@ Installer la base de données
 
 ````
 bin/console doctrine:database:create
-bin/console make:migrations
-bin/console doctrine:make:migration
+bin/console make:migration
+bin/console doctrine:migration:migrate
 ````
 
 Tester le site :
