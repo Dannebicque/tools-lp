@@ -329,7 +329,13 @@ Puis l'affichage, par exemple :
 
 Vous devriez avoir la liste des fournisseurs affichée :
 
-![Liste des fournisseurs](liste_fournisseurs.png)
+![Liste des fournisseurs](liste_fournisseur.png)
+
+### A vous de jouer
+
+Faite la même chose pour afficher les articles.
+
+Pour aller plus loin, comment pourriez vous faire pour afficher les détails d'un article lorsque je clique dessus ? Regardez bien le résultat retourné par ApiPlatform...
 
 ### Authentifier la connexion
 
