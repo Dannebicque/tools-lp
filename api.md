@@ -281,7 +281,55 @@ On nommera le projet **vueDutaf** (avec les presets par défaut).
 
 On va ensuite ajouter vue-router et axios (on pourrait utiliser le fecth natif également), grâce à l'interface graphique (dépendances => ajouter une dépendance)
 
+L'objet de ce module n'étant pas forcément VueJS, vous pouvez simplement récupérer le dépot initial en execuatant les commandes ci-dessous
+
+```
+git clone https://github.com/Dannebicque/vuedutaf.git
+cd vuedutaf
+npm install
+npm run serve
+```
+
 ### Créer une première page pour afficher les fournisseurs
+
+On va lister les fournisseurs dans la page Fournisseurs. Pour cela, on va éditer le composant Fournisseurs.vue
+En explorant la document générée par ApiPlatform, on voit que l'URL pour collecter tous les fournisseurs (avec éventuellement une pagination est : http://localhost:8888/dutafLP/public/index.php/api/fournisseurs (localhost dans mon cas).
+
+![ApiPlatfom get Fournisseurs](api_fournisseurs.png)
+
+On va donc ajouter une méthode dans le composant fournisseur pour qu'il récupère tous les fournisseurs lorsque la page est "montée".
+
+Pour cela, on pourrait avoir une méthode pour récupérer les données qui ressemblerait à 
+
+```js
+async mounted () {
+  this.items = await axios.get('http://localhost:8888/dutafLP/public/index.php/api/fournisseurs'
+  ).then(req => {
+    console.log(req.data)
+    return req.data['hydra:member']
+  })
+},
+```
+
+this.items correspond à une variable permettant de récupérer les données et de les exploiter :
+```js
+data: function () {
+  return {
+    items: {}
+  }
+},
+```
+
+Puis l'affichage, par exemple : 
+```
+<ul>
+  <li v-for="item in items" :key="item.id">{{item.nom}}</li>
+</ul>
+```
+
+Vous devriez avoir la liste des fournisseurs affichée :
+
+![Liste des fournisseurs](liste_fournisseurs.png)
 
 ### Authentifier la connexion
 
