@@ -33,7 +33,7 @@ API Platform propose de nombreuses librairie afin de générer la partie front (
 
 ### Installation
 
-L'installation est très simple :
+L'installation est très simple (sans un projet déjà existant) :
 
 ````
 composer require api
@@ -58,8 +58,47 @@ Juste avant le nom de la classe, sans oublier :
 use ApiPlatform\Core\Annotation\ApiResource;
 ````
 
+#### Mise en pratique
 
-Soit pour notre fichier :
+On va repartir sur une base de DUTAF avec Symfony. Pensez à supprimer l'ancien projet ou le renommer.
+
+Pour cela, placez-vous dans le repertoire de votre serveur web (public_html, www, htdocs...) et executez la commande suivante pour récupérer le projet :
+
+````
+git clone https://github.com/Dannebicque/dutafLP.git
+````
+
+Vous devez ensuite dupliquer le fichier .env en .env.local et mettre à jour les données de votre base de données.
+
+````
+cd dutafLP
+cp .env .env.local
+nano .env.local
+````
+
+Vous devez ensuite installer les dépendances de symfony (les vendors)
+
+````
+composer install (ou php composer.phar install selon votre configuration)
+````
+
+Puis, mettre en place la base de données
+
+````
+bin/console doctrine:database:create #Si la BDD n'existe pas encore, sinon supprimer avant l'ancienne base de données
+bin/console doctrine:schema:update -f
+````
+
+Enfin, installer ApiPlatform
+
+````
+composer require api
+````
+
+Il ne vous reste plus qu'a définir quelles sont les entitées que vous voulez gérer avec ApiPlatform en modifiant les fichiers.
+
+
+Soit, par exemple, pour notre entité Fournisseur :
 
 ````
 <?php
