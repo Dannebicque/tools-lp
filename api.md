@@ -120,6 +120,8 @@ class Fournisseur
 }
 ````
 
+**Ajoutez quelques données dans les deux tables (2 fournisseurs et 4 produits par exemple), afin de pouvoir tester.**
+
 Rechargez votre navigateur, et voilà !
 
 Sans aucune autre configuration, vous avez une API qui permet de manipuler votre entité Fournisseur. 
@@ -178,7 +180,7 @@ Testez depuis Postman :
 
 ### A vous de jouer encore
 
-Ajoutez les entités User et Article dans Api Platform.
+Ajoutez l'entité Article dans Api Platform.
 
 ## Filtrer les opérations
 
@@ -247,3 +249,41 @@ Mettez en place l'administration à base de React-Admin pour notre projet.
 ## A lire
 
 Une présentation faite lors du SymfonyCon de Paris : [https://dunglas.fr/2019/03/symfonylive-paris-slides-symfony-on-steroids%e2%80%a8-vue-js-mercure-panther/](https://dunglas.fr/2019/03/symfonylive-paris-slides-symfony-on-steroids%e2%80%a8-vue-js-mercure-panther/) sur l'intégration de Symfony, VueJs et mercure afin de rendre vos applications plus intéractives avec une base Symfony.
+
+## Manipulation des données avec ApiPlatform et VueJS (ou autre framework front)
+
+Dans cette dernière partie, nous allons rapidement voir comment manipuler, en partant de rien, les données issues d'ApiPlatform et comment authentifier les échanges avec un token (on utilisera JWTToken).
+
+Vous allez créer un nouveau projet VueJs.
+
+Je vous propose pour ceux qui souhaitent le faire avec VueJS, d'utiliser un utilitaire très pratiques Vue-CLI (https://cli.vuejs.org/). Vue CLI propose une interface graphique (en plus des commandes pour créer un projet en ligne de commande) pour gérer ses projets VueJS.
+
+L'installation de Vue-Cli se fait avec Node ou Yarn.
+
+```
+npm install -g @vue/cli
+# OR
+yarn global add @vue/cli
+```
+
+Il suffit ensuite de lancer Vue-Cli avec la commande suivante :
+
+```
+vue ui
+```
+
+Vous devriez obtenir une interface de ce type :
+
+![Interface Vue UI](vue_ui.png)
+
+Démonstration pour la création d'un projet.
+On nommera le projet **vueDutaf** (avec les presets par défaut).
+
+On va ensuite ajouter vue-router et axios (on pourrait utiliser le fecth natif également), grâce à l'interface graphique (dépendances => ajouter une dépendance)
+
+### Créer une première page pour afficher les fournisseurs
+
+### Authentifier la connexion
+
+
+
