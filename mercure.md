@@ -3,6 +3,7 @@
 Le cours se base sur les supportd suivants :
 
 * [Documentation de Symfony](https://symfony.com/doc/current/mercure.html)
+* [Document de Mercure](https://mercure.rocks/)
 * [Repo d'une démonstration réalisée au SymfonyCon de Lisbonne et de Paris](https://github.com/dunglas/symfonycon-lisbon)
 * [Les slides associés](https://dunglas.fr/2019/03/symfonylive-paris-slides-symfony-on-steroids%e2%80%a8-vue-js-mercure-panther/)
 * [Tuto sur Grafikart](https://www.grafikart.fr/tutoriels/symfony-mercure-1151)
