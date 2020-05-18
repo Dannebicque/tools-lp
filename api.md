@@ -335,9 +335,9 @@ Vous devriez avoir la liste des fournisseurs affichée :
 
 Faite la même chose pour afficher les articles.
 
-Pour aller plus loin, comment pourriez vous faire pour afficher les détails d'un article lorsque je clique dessus ? Regardez bien le résultat retourné par ApiPlatform...
+Comment pourriez vous faire pour afficher les détails d'un article lorsque je clique dessus ? Regardez bien le résultat retourné par ApiPlatform...
 
-### Authentifier la connexion
-
+### Rendu
+pour 12h00, vous m'enverrez sur discord (en PV), une capture d'écran de vos pages et les fichiers sources (.vue, .html, .js selon l'outil front utilisé) (ou un lien)
 
 
