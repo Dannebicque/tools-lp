@@ -202,10 +202,11 @@ Si vous modifiez le fichier html de test précédent, en écoutant le topic : ht
 
 Proposer une application (soit une nouvelle installation de Symfony, soit en complétant le projet en cours) qui permet d'avoir une salle de Tchat avec plusieurs utilisateurs.
 * Dans un premier temps on peut simplement considérer que tous les utilisateurs visualisent tous les messages (tchat public).
-* Ajouter une liste des personnes connectées
+* Dans un second temps, on aimerait ajouter un système de message privés (choix du destinataire)
+* Bonus : Ajouter une liste des personnes connectées (on pourrait déclencher un événement sur la connexion de l'utilisateur).
 
-## Authentifier le destinataire
+## Rendu
 
-Le principe consiste à définir un cookie pour chaque session (dépendant par exemple de l'utilisateur connecté), puis de passer ce cookie dans les échanges afin d'authentifier le client.
+à 18h00, vous m'enverrez sur Discord (en PV), une capture d'écran de votre tchat, et les fichiers controllers et twig associés.
 
-A venir...
+
