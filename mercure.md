@@ -27,15 +27,6 @@ Pour les utilisateurs de Windows, il exite l'executable. Pour linux les dépenda
 ### pour MacOS
 *Nota* Pour MacOs, choisir la version "Darwings" correspondante à votre processeur (32 (i386) ou 64 bits). Vous devrez probablement autoriser dans la sécurité l'execution de merci.
 
-*Nota* Pour les utilisateurs de MacOs, il faut installer Go (le langage de programmation), [avec Brew par exemple](http://sourabhbajaj.com/mac-setup/Go/README.html), et ensuite compiler les sources :
-
-````
-git clone https://github.com/dunglas/mercure
-cd mercure
-GO111MODULE=on go get
-GO111MODULE=on go build
-````
-
 ### Pour Windows
 
 Il faut créer 4 variables d'environnements :
@@ -45,7 +36,7 @@ Il faut créer 4 variables d'environnements :
 * ALLOW_ANONYMOUS avec "1"
 * CORS_ALLOWED_ORIGINS avec "*"
 
-Puis executer uniquement **mercure** dans votre console.
+Puis executer uniquement **mercure.exe** dans votre console.
 
 ## Executer Mercure
 
