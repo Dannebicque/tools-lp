@@ -252,7 +252,7 @@ Une présentation faite lors du SymfonyCon de Paris : [https://dunglas.fr/2019/0
 
 ## Manipulation des données avec ApiPlatform et VueJS (ou autre framework front)
 
-Dans cette dernière partie, nous allons rapidement voir comment manipuler, en partant de rien, les données issues d'ApiPlatform et comment authentifier les échanges avec un token (on utilisera JWTToken).
+Dans cette dernière partie, nous allons voir comment manipuler, en partant de rien, les données issues d'ApiPlatform et comment authentifier les échanges avec un token (on utilisera JWTToken).
 
 Vous allez créer un nouveau projet VueJs.
 
@@ -289,6 +289,10 @@ cd vuedutaf
 npm install
 npm run serve
 ```
+
+### Créer une application sans Vue ui
+
+https://cli.vuejs.org/guide/creating-a-project.html#vue-create
 
 ### Créer une première page pour afficher les fournisseurs
 
@@ -331,13 +335,50 @@ Vous devriez avoir la liste des fournisseurs affichée :
 
 ![Liste des fournisseurs](liste_fournisseur.png)
 
+
 ### A vous de jouer
 
-Faite la même chose pour afficher les articles.
-
-Comment pourriez vous faire pour afficher les détails d'un article lorsque je clique dessus ? Regardez bien le résultat retourné par ApiPlatform...
+1. Faite la même chose pour afficher les articles.
+2. Comment pourriez vous faire pour afficher les détails d'un article lorsque je clique dessus ? Regardez bien le résultat retourné par ApiPlatform...
+3. Proposez un "CRUD" pour la gestion des fournisseurs (avec a minima ajout et modification) en utilisant l'API avec les requêtes POST et PUT.
 
 ### Rendu
 pour 12h00, vous m'enverrez sur discord (en PV), une capture d'écran de vos pages et les fichiers sources (.vue, .html, .js selon l'outil front utilisé) (ou un lien)
 
+
+### Authentifier les échanges avec JWT
+
+Pour info. Optionnel.
+
+Installer et configurer JWT
+https://api-platform.com/docs/core/jwt/
+
+Puis ensuite utiliser le Token dans vos échanges entre le front et le back.
+
+La première chose est d'authentifier votre utilisateur en envoyant login et password au Back, avec par exemple le code ci-dessous
+
+```js
+axios({url: 'http://localhost:8888/ptutApi/public/index.php/authentication_token', data: {username:username, password:password}, method: 'POST' }) //username et password proviennent du formulaire
+          .then(resp => {
+            const token = resp.data.token
+            const userData = atob(resp.data.token.split('.')[1]) //on récupère les données de l'utilisateur, par défaut, login, rôles
+            localStorage.setItem('user', userData) // store the user in localstorage
+            localStorage.setItem('usertoken', token) // store the token in localstorage
+            router.push('/')
+          })
+          .catch(err => {
+            localStorage.removeItem('user-token') // if the request fails, remove any possible user token if possible
+          })
+```
+
+Il faut ensuite envoyer sur chaque requête du front vers le back, le token précédemment récupéré pour authentifier les échanges.
+
+Par exemple avec Axios.
+```js
+axios.post(url, {
+  headers: {
+    'Authorization': `Bearer ` + localStorage.getItem('usertoken')
+  }
+})
+```
 
