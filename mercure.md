@@ -156,7 +156,7 @@ eventSource.onmessage = e => {
 use Symfony\Component\Mercure\PublisherInterface;
 use Symfony\Component\Mercure\Update;
 
-public function new(Publisher $publisher, Request $request): Response
+public function new(PublisherInterface $publisher, Request $request): Response
     {
         ...
         if ($form->isSubmitted() && $form->isValid()) {
