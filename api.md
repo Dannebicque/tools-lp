@@ -60,36 +60,9 @@ use ApiPlatform\Core\Annotation\ApiResource;
 
 #### Mise en pratique
 
-On va repartir sur une base de DUTAF avec Symfony. Pensez à supprimer l'ancien projet ou le renommer.
+On va repartir sur une base de DUTAF avec Symfony. Pensez à supprimer les éventuels anciens projets ou les renommer. Les Elements se trouve ici : [Application de démonstration](demo.md)
 
-Pour cela, placez-vous dans le repertoire de votre serveur web (public_html, www, htdocs...) et executez la commande suivante pour récupérer le projet :
-
-````
-git clone https://github.com/Dannebicque/dutafLP.git
-````
-
-Vous devez ensuite dupliquer le fichier .env en .env.local et mettre à jour les données de votre base de données.
-
-````
-cd dutafLP
-cp .env .env.local
-nano .env.local
-````
-
-Vous devez ensuite installer les dépendances de symfony (les vendors)
-
-````
-composer install (ou php composer.phar install selon votre configuration)
-````
-
-Puis, mettre en place la base de données
-
-````
-bin/console doctrine:database:create #Si la BDD n'existe pas encore, sinon supprimer avant l'ancienne base de données
-bin/console doctrine:schema:update -f
-````
-
-Enfin, installer ApiPlatform
+Ensuite, installer ApiPlatform
 
 ````
 composer require api
