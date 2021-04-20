@@ -73,7 +73,7 @@ p {
 
 Et son utilisation dans une page (ou d'autres composants)
 
-```
+```js
 ...
 <Bonjour />
 ...
@@ -104,12 +104,52 @@ p {
 
 Et son utilisation dans une page (ou d'autres composants)
 
-```
+```js
 ...
 <Bonjour msg="Bonjour !" />
 <Bonjour msg="VueJs C'est super" />
 ...
 ```
 
+### Exercices
+
+Créer des composantes pour :
+
+* Un champ de formulaire de type "text" comprenant :
+  * un label, une zone de saisie, et une classe, si le champ est obligatoire ou non
+* Une liste déroulante de formulaire comprenant :
+  * Un label, des données, et une classe, si le champ est obligatoire ou non
+
+## Manipulation de l'API
+
+Axios permet d'effectuer toutes les requêtes REST classique :
+```
+Extrait de la documentation
+Request method aliases
+For convenience aliases have been provided for all supported request methods.
+
+axios.request(config)
+axios.get(url[, config])
+axios.delete(url[, config])
+axios.head(url[, config])
+axios.options(url[, config])
+axios.post(url[, data[, config]])
+axios.put(url[, data[, config]])
+axios.patch(url[, data[, config]])
+```
+
+### Exercices
+
+En reprenant l'exemple vue avec Frédéric et André, on va écrire un fichier par "entité" de notre partie back.
+
+un fichier fournisseur.js et article.js à mettre "services".
+Ces fichiers vont contenir les méthodes suivantes :
+* Récupérer tous les éléments (get)
+* Récupérer un élément par id (get)
+* Créer un élément (post)
+* Supprimer un élément par id (delete)
+* Modifier un élément par id (put)
+
+Dans un premier temps ajouter les méthodes dans les deux fichiers et ajuster les lignes avec axios pour gérer les différents cas.
 
 
