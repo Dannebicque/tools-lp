@@ -152,4 +152,71 @@ Ces fichiers vont contenir les méthodes suivantes :
 
 Dans un premier temps ajouter les méthodes dans les deux fichiers et ajuster les lignes avec axios pour gérer les différents cas.
 
+## Récupérer les fournisseurs
 
+Dans votre page Fournisseur.vue importez le fichier js permettant de manipuler l'API.
+
+Vous pourriez avoir une page de ce type :
+
+```js
+<template>
+  <div class="about">
+    <h1>Liste des fournisseurs</h1>
+    ...Afficher les fournisseurs ici ...
+  </div>
+</template>
+
+<script>
+import { getFournisseurs } from '../services/fournisseur';
+
+export default {
+  name: 'Fournisseurs',
+  data () {
+    return {
+      fournisseurs: null
+    }
+  },
+  async mounted () {
+    this.fournisseurs = await getFournisseurs()
+  }
+}
+</script>
+```
+
+## Ajouter un fournisseur
+
+Ajouter une route et le composant associé afin de pouvoir ajouter un fournisseur.
+Utiliser les composants créés plus tôt pour faire un formulaire permettant de créer un nouveau fournisseur.
+
+Les données des champs se font par l'intermédiaire des [v-model](https://vuejs.org/v2/guide/forms.html)
+
+Il faut ensuite construire un objet que vous allez passer à votre méthode pour faire un ajout (post).
+
+Exemple :
+
+```js
+methods: {
+    addFournisseur: function() {
+      
+      postFournisseur({
+        libelle: this.libelle,
+        nom: this.libelle,
+        ville: this.ville,
+        telephone: this.telephone,
+      })
+    }
+  }
+```
+**On pourra créer un composant pour afficher un fournisseur**
+
+### Exercice
+
+Un fois que les fournisseurs fonctionnent, faites de même pour les articles.
+Un article dépend d'un fournisseur, vous devez donc récupérer la liste des fournisseurs pour alimenter une liste déroulante.
+Pour ajouter les données avec APIPlatform, il faut passer l'URI comme "id" du fournisseur. APIPlatform se chargera de faire le lien entre les entités.
+
+**On pourra créer un composant pour afficher un article**
+
+## Mise à jour et suppression
+
+En vous inspirant des pages précédentes, permettre la modification et la suppression d'un fournisseur et d'un article.
