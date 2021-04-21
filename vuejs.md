@@ -200,7 +200,6 @@ methods: {
       
       postFournisseur({
         libelle: this.libelle,
-        nom: this.libelle,
         ville: this.ville,
         telephone: this.telephone,
       })
