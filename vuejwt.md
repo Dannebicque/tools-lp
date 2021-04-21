@@ -1,7 +1,9 @@
 # Authentifier les échanges avec JWT
 
 ## Installer JWT du côté back
-Installer et configurer JWT https://api-platform.com/docs/core/jwt/
+Installer et configurer JWT https://api-platform.com/docs/core/jwt/ (ou éventuellement : https://emirkarsiyakali.com/implementing-jwt-authentication-to-your-api-platform-application-885f014d3358)
+
+/!\ Une série de vidéo est sortie cette semaine sur ApiPlatform : [Grafikart](https://grafikart.fr/formations/api-plaform)
 
 Puis ensuite utiliser le Token dans vos échanges entre le front et le back.
 
