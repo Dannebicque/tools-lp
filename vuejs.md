@@ -219,3 +219,11 @@ Pour ajouter les données avec APIPlatform, il faut passer l'URI comme "id" du f
 ## Mise à jour et suppression
 
 En vous inspirant des pages précédentes, permettre la modification et la suppression d'un fournisseur et d'un article.
+
+## Page recherche
+
+Sur le home, ajoutez la possibilité de faire une recherche et de récupère les articles inférieurs à un prix.
+
+Vous pourriez avoir besoin de créer une route spécifique dans ApiPlatform. Vous pouvez regarder dans cette partie de la documentation : https://api-platform.com/docs/core/filters/
+
+/!\ Attention la documentation utilise les annotations PHP8. Ce qui n'est probablement pas votre cas. Vous devez transposer avec la notation "classique" de Symfony.
