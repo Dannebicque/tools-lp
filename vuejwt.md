@@ -57,3 +57,19 @@ router.beforeEach((to, from, next) => {
   else next()
 })
 ```
+
+## Mise en page
+
+Tout comme pour du HTML/CSS "conventionnel", il existe des librairies pour rapidement mettre en forme votre application VueJS. La plus connue est probablement [Vuetify](https://vuetifyjs.com/en/) (basée sur le Material Design), mais vous pouvez aussi trouver [Boostrap-Vue](https://bootstrap-vue.org/docs). Ces deux libriaires proposent des composants avec une logique et une interactivité, mais aussi le CSS adapté.
+
+Vous pourriez aussi installer directement bootstrap (ou autre), et créer vos propre composant sur la même logique.
+
+Choisir l'une des librairies et personnaliser votre site web.
+
+## Ressources
+
+Diverses ressources en lien avec VueJS :
+
+* https://awesome-vue.js.org/
+* https://madewithvuejs.com/
+
