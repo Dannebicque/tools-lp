@@ -437,3 +437,7 @@ Vous pouvez vous faire un script qui avant chaque phase de test :
 3. Ajoute les tables
 4. Execute éventuellement les fixtures
 5. Execute PHPUnit
+
+## Exercices
+
+Mettre en place les fichiers pour tester la partie produits et fournisseurs de votre projet.
