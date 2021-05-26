@@ -127,22 +127,28 @@ Le code produit est équivalent à celui ci-après
 ````
 <?php
 
+<?php
+
 namespace App\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class DefaultControllerTest extends WebTestCase
 {
-    public function testSomething()
+    public function testSomething(): void
     {
         $client = static::createClient();
+
+        // Request a specific page
         $crawler = $client->request('GET', '/');
 
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('Liste des articles', $crawler->filter('h1')->text());
+        // Validate a successful response and some content
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('h1', 'Homepage de Dutaf');
         // Liste des articles est le texte recherché dans la page, dans la balise h1.
     }
 }
+
 ````
 
 Dans l'exemple ci-dessous, on execute un test (une méthode) et deux assertions (deux vérifications dans la même méthode (la réponse est égale à 200 et le contenu de la balise H1).
@@ -194,6 +200,8 @@ Pour tester les liens contenus dans une page, il faut :
 
  }
  ````
+ 
+ NOTA: N'oubliez pas d'ajouter le lien sur votre "homepage"
 
 ## Tester les formulaires
 
@@ -228,6 +236,9 @@ Pour tester un formulaire, et tout particulierement sa soumission, la démarche 
 
  }
  ````
+ 
+ Nota : N'oubliez pas de créer le formulaire sur votre "homepage"
+ 
 ### Application
 
 Ecrire un test qui vérifie votre formulaire de création d'un fournisseur. Selon-vous, et selon le code écrit quel est la réponse attendue ?
