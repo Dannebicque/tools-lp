@@ -63,6 +63,10 @@ bin/console doctrine:fixtures:load
 
 Toutes les fixtures (classes et méthodes) seront executées.
 
+### Générer des données "réelles"
+
+Il existe des bundles permettant de créer des données "réelles". Le plus connu et utilisé est probablement Faker [https://github.com/fzaninotto/Faker](https://github.com/fzaninotto/Faker) qui permet de générer de nombreuses données (utilisateur, téléphone, adresse, code barre, ...) dans de nomnbreuses langues.
+
 ### Exemple concret
 
 La fixture ci-dessous permet de créer un fournisseur.
