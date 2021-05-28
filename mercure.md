@@ -25,7 +25,7 @@ Rendez-vous sur [GitHub](https://github.com/dunglas/mercure/releases) pour récu
 Pour les utilisateurs de Windows, il exite l'executable. Pour linux les dépendances nécessaires. Dans tous les cas vous avez les sources que vous pouvez compiler pour obtenir le fichier "mercure" executable.
 
 ### pour MacOS
-*Nota* Pour MacOs, choisir la version "Darwings" correspondante à votre processeur (32 (i386) ou 64 bits). Vous devrez probablement autoriser dans la sécurité l'execution de merci.
+*Nota* Pour MacOs, choisir la version "Darwings". Vous devrez probablement autoriser dans la sécurité l'execution de merci.
 
 ### Pour Windows
 
@@ -50,7 +50,7 @@ n'oubliez pas de mettre à jour le chemin de votre executable, et idéalement de
 
 **Welcome to Mercure!**
 
-[!mercure.png]
+[!mercure.png](mercure)
 
 ## Tester Mercure
 
@@ -198,6 +198,6 @@ Proposer une application (soit une nouvelle installation de Symfony, soit en com
 
 ## Rendu
 
-à 18h00, vous m'enverrez sur Discord (en PV), une capture d'écran de votre tchat, et les fichiers controllers et twig associés.
+à 12h00, vous m'enverrez sur Discord (en PV), une capture d'écran de votre tchat, et les fichiers controllers et twig associés.
 
 
