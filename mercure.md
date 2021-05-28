@@ -170,7 +170,7 @@ public function new(HubInterface $publisher, Request $request): Response
             );
 
             // The Publisher service is an invokable object
-            $publisher($update);
+            $publisher->publish($update);
 
             return $this->redirectToRoute('fournisseur_index');
         }
