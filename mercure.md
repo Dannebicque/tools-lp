@@ -153,10 +153,10 @@ eventSource.onmessage = e => {
  Si on souhaite par exemple informer tous les utilisateurs de notre DUTAF de l'apparition d'un nouveau produit, le code pourrait être le suivant :
  
  ````
-use Symfony\Component\Mercure\PublisherInterface;
+use Symfony\Component\Mercure\HubInterface;
 use Symfony\Component\Mercure\Update;
 
-public function new(PublisherInterface $publisher, Request $request): Response
+public function new(HubInterface $publisher, Request $request): Response
     {
         ...
         if ($form->isSubmitted() && $form->isValid()) {
