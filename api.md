@@ -211,7 +211,7 @@ En vous basant sur API plateforme, écrire une page simple, qui permet de lister
 
 API Platform propose de nombreuses manières de gérer la partie Front. 
 
-Notamment une administration auto-genérée, basée sur React (React-Admin), [https://api-platform.com/docs/admin/](https://api-platform.com/docs/admin/).
+Notamment une administration auto-genérée, basée sur React (React-Generator), [https://api-platform.com/docs/admin/](https://api-platform.com/docs/admin/).
 
 Api Platform propose aussi des générateurs (qui vont produire le code et les fichiers associés) notamment pour les framework React et VueJs, mais aussi pour des applications mobiles (React Native) [https://api-platform.com/docs/client-generator/](https://api-platform.com/docs/client-generator/)
 
@@ -239,7 +239,7 @@ npm install -g @vue/cli
 yarn global add @vue/cli
 ```
 
-Il suffit ensuite de lancer Vue-Cli avec la commande suivante :
+Il faut ensuite de lancer Vue-Cli avec la commande suivante :
 
 ```
 vue ui
