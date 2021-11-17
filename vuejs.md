@@ -89,7 +89,7 @@ export default {
       notes: {
         "Symfony": 12,
         "Réseau": 14,
-        "Intégration": 16,
+        "Intégration": 8,
         "Maths": 19,
         "Anglais": 12
       }
@@ -113,9 +113,34 @@ Calculez la moyenne des notes.
 - Une solution consiste à faire de nouveau une boucle pour calculer la moyenne dans la partie "html", pas conseillé,
 - Une autre solution consiste à utiliser les [Propriétés calculées](https://fr.vuejs.org/v2/guide/computed.html#Proprietes-calculees), en vous basant sur la documentation, proposez une méthode pour calculer la moyenne et afficher le résultat.
 
+## Tests
+
+Les tests se font avec l'instruction [v-if](https://fr.vuejs.org/v2/guide/conditional.html). 
+Exemple, issue de la documentation :
+
+```
+<h1 v-if="awesome">Vue est extraordinaire !</h1>
+```
+
+Affichera le message selon la valeur de la variable "awesome". Concrétement, le titre H1 sera visible si awesome est vrai. Dans le cas contraire, rien ne s'affiche (et le code n'existe pas dans la source HTML !).
+
+Il existe un v-else, et on pourrait écrire :
+
+```
+<h1 v-if="awesome">Vue est extraordinaire !</h1>
+<h1 v-else>Oh non 😢</h1>
+```
+
+Le v-if (tout comme le v-for), peut s'appliquer sur toutes les balises HTML. Y compris la balise <template>. Les tests peuvent bien sûr être plus complexe que simplement une variable booléenne, et la syntaxe des conditions et des opérateurs est identique au javascript.
+  
+Il existe de manière assez identique l'instruction v-show, qui fonctionne de manière assez similaire, mais qui laisse le code apparaître dans la source HTML (masqué ou non (display:none) selon l'état de la condition).
+  
+Vous trouverez [sur ce lien](https://fr.vuejs.org/v2/guide/conditional.html#v-if-vs-v-show) des éléments d'explications sur comment et quand choisir v-if ou v-show.
+  
+
 ## Créer des composants
 
-Tout l'intéret des framework du type vueJs est la notion de composant, qui sont des "morceaux" de page, qui contiennent une logique (du HTML, du js et du CSS). 
+Tout l'intéret des framework du type VueJs est la notion de composant, qui sont des "morceaux" de page, qui contiennent une logique (du HTML, du js et du CSS). 
 Ces composants peuvent être très simplement réutilisés, en récupérant des "paramètres".
 
 Exemple :
