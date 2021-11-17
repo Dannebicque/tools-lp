@@ -118,7 +118,7 @@ Créer des composantes pour :
 * Un champ de formulaire de type "text" comprenant :
   * un label, une zone de saisie, et une classe, si le champ est obligatoire ou non
 * Une liste déroulante de formulaire comprenant :
-  * Un label, des données, et une classe, si le champ est obligatoire ou non
+  * Un label, des données (tableau json), et une classe, si le champ est obligatoire ou non
 
 ## Manipulation de l'API
 
@@ -138,11 +138,43 @@ axios.put(url[, data[, config]])
 axios.patch(url[, data[, config]])
 ```
 
+## Création d'un service
+
+Une bonne pratique consiste à définir un fichier contenant nos "requêtes" Axios (ou appels à une API de manière général). Généralement un fichier par "entité".
+
+Le fichier ci-dessous, permet d'executer quelques requêtes vers une entité Article de notre API
+
+```js
+import axios from 'axios'
+
+const BASE_URL = 'http://localhost:8888/lpdev2021/public/index.php/api/articles'
+
+async function getArticles()
+{
+    return await axios.get(BASE_URL);
+}
+
+async function getArticle(id)
+{
+  return await axios.get(BASE_URL+'/'+id);
+}
+
+async function postArticle(data)
+{
+  return await axios.post(BASE_URL, data);
+}
+
+export {getArticles, getArticle, postArticle}
+```
+
+L'interet est de n'avoir qu'une seule fois l'URL de notre API pour article, et donc de pouvoir rapidement mettre à jour. On pourrait même centraliser ces URL dans un seul et unique fichier. Ce fichier est à mettre dans un repertoire nommé services ou api, ...
+
 ### Exercices
 
-En reprenant l'exemple vue avec Frédéric et André, on va écrire un fichier par "entité" de notre partie back.
+En reprenant l'exemple ci-dessous.
 
-un fichier fournisseur.js et article.js à mettre "services".
+Ecrire un fichier pour récupérer vos messages et vos catégories (ou équivalent avec le sujet "avancé").
+
 Ces fichiers vont contenir les méthodes suivantes :
 * Récupérer tous les éléments (get)
 * Récupérer un élément par id (get)
@@ -152,43 +184,43 @@ Ces fichiers vont contenir les méthodes suivantes :
 
 Dans un premier temps ajouter les méthodes dans les deux fichiers et ajuster les lignes avec axios pour gérer les différents cas.
 
-## Récupérer les fournisseurs
+## Récupérer les Catégories
 
-Dans votre page Fournisseur.vue importez le fichier js permettant de manipuler l'API.
+Dans une page Categorie.vue importez le fichier js permettant de manipuler l'API.
 
 Vous pourriez avoir une page de ce type :
 
 ```js
 <template>
   <div class="about">
-    <h1>Liste des fournisseurs</h1>
-    ...Afficher les fournisseurs ici ...
+    <h1>Liste des Catégories</h1>
+    ...Afficher les catégories ici ...
   </div>
 </template>
 
 <script>
-import { getFournisseurs } from '../services/fournisseur';
+import { getCategories } from '../services/categories';
 
 export default {
-  name: 'Fournisseurs',
+  name: 'Categories',
   data () {
     return {
-      fournisseurs: null
+      categories: null
     }
   },
   async mounted () {
-    this.fournisseurs = await getFournisseurs()
+    this.categories = await getCategories()
   }
 }
 </script>
 ```
 
-## Ajouter un fournisseur
+## Ajouter une catégorie
 
-Ajouter une route et le composant associé afin de pouvoir ajouter un fournisseur.
-Utiliser les composants créés plus tôt pour faire un formulaire permettant de créer un nouveau fournisseur.
+Ajouter une route et le composant associé afin de pouvoir ajouter une catégorie.
+Utiliser les composants créés plus tôt pour faire un formulaire permettant de créer une nouvelle catégorie.
 
-Les données des champs se font par l'intermédiaire des [v-model](https://vuejs.org/v2/guide/forms.html)
+Les données des champs se font par l'intermédiaire des [v-model](https://vuejs.org/v3/guide/forms.html)
 
 Il faut ensuite construire un objet que vous allez passer à votre méthode pour faire un ajout (post).
 
@@ -196,33 +228,32 @@ Exemple :
 
 ```js
 methods: {
-    addFournisseur: function() {
+    addCategorie: function() {
       
-      postFournisseur({
-        libelle: this.libelle,
-        ville: this.ville,
-        telephone: this.telephone,
+      postCategorie({
+        libelle: this.libelle
       })
     }
   }
 ```
-**On pourra créer un composant pour afficher un fournisseur**
+
+**On pourra créer un composant pour afficher une catégorie**
 
 ### Exercice
 
-Un fois que les fournisseurs fonctionnent, faites de même pour les articles.
-Un article dépend d'un fournisseur, vous devez donc récupérer la liste des fournisseurs pour alimenter une liste déroulante.
-Pour ajouter les données avec APIPlatform, il faut passer l'URI comme "id" du fournisseur. APIPlatform se chargera de faire le lien entre les entités.
+Un fois que les catégories fonctionnent, faites de même pour les messages.
+Un message dépend d'une catégorie, vous devez donc récupérer la liste des catégories pour alimenter une liste déroulante.
+Pour ajouter les données avec APIPlatform, il faut passer l'URI comme "id" de la catégorie. APIPlatform se chargera de faire le lien entre les entités.
 
-**On pourra créer un composant pour afficher un article**
+**On pourra créer un composant pour afficher un message**
 
 ## Mise à jour et suppression
 
-En vous inspirant des pages précédentes, permettre la modification et la suppression d'un fournisseur et d'un article.
+En vous inspirant des pages précédentes, permettre la modification et la suppression d'un message et d'une catégorie.
 
 ## Page recherche
 
-Sur le home, ajoutez la possibilité de faire une recherche et de récupère les articles inférieurs à un prix.
+Sur le home, ajoutez la possibilité de faire une recherche et de récupère les messages correspondant.
 
 Vous pourriez avoir besoin de créer une route spécifique dans ApiPlatform. Vous pouvez regarder dans cette partie de la documentation : https://api-platform.com/docs/core/filters/
 
