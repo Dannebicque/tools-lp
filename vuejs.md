@@ -1,3 +1,16 @@
+# PHP 8
+
+En préambule, quelques explications sur les nouveautés PHP8 et PHP8.1
+
+Les références :
+
+https://stitcher.io/blog/new-in-php-8
+https://stitcher.io/blog/php-8-match-or-switch
+https://stitcher.io/blog/new-in-php-81
+https://stitcher.io/blog/php-enums
+https://stitcher.io/blog/php-81-in-8-code-blocks
+
+
 # VueJS
 
 Objectif : Mettre en place une application simple, basée sur VueJS, permettant d'afficher un catalogue, et de le gérer 
