@@ -20,7 +20,7 @@ Vous pouvez sauvegarder le preset pour d'autres projets si besoin.
 
 /!\ Vous pourriez aussi utiliser `vue ui` pour obtenir une interface graphique.
 
-
+## Explications des fichiers et de la structure
 
 ## Premières manipulations.
 
@@ -204,8 +204,6 @@ npm install axios
 
 (vous pouvez utiliser Yarn).
 
-## Explications des fichiers et de la structure
-
 ## Créer des routes
 
 ### Principes
@@ -214,7 +212,33 @@ npm install axios
 
 Créer les routes permettant de gérer les articles, les fournisseurs et la page d'acceuil. Créer les composants des différentes "pages" nécessaires.
 
+## Repartir sur des bonnes bases.
 
+Pour avoir la même base et la même solution, vous allez refaire un projet Symfony. On va utiliser la version "website" qui contient toutes les dépendances nécessaires.
+
+```
+composer create-project symfony/website-skeleton nomDuProjet
+cd nomDuProjet
+composer require api
+cp .env .env.local
+nano .env.local (modifier votre ligne de connexion à la BDD).
+bin/console d:d:c (création de la BDD)
+```
+
+
+Créer deux entités.
+
+- Category
+ - Un libellé, texte, non null
+ - Une couleur, texte, non null
+
+- Message
+ - Un titre, texte, non null
+ - Une date de publication, datetime
+ - Un message, longtext, non null
+ - Une catégoie (ManytoOne)
+
+Associez ces deux entités à ApiPlatform. Insérez quelques données dan la base de données (directement en phpMyAdmin), et testez que tout fonctionne avec Postman.
 
 ## Manipulation de l'API
 
