@@ -20,29 +20,98 @@ Vous pouvez sauvegarder le preset pour d'autres projets si besoin.
 
 /!\ Vous pourriez aussi utiliser `vue ui` pour obtenir une interface graphique.
 
-## Installation d'Axios
 
-On va utiliser la librairie Axios pour faire des requêtes à notre API (on pourrait utiliser Fetch).
 
-La librairie se trouve ici : https://www.npmjs.com/package/axios
+## Premières manipulations.
 
-Et l'installation se fait avec la ligne suivante (en étant dans le répertoire de votre projet)
+Dans le composant App.vue qui est créé par défaut, et qui est le point d'entrée de votre application, nous allons faire les premiers tests.
+
+Nous allons définir une liste de 3 éléments, par exemple :
+
+```html
+<ul>
+  <li>Note sur Symfony : 19</li>
+  <li>Note en intégration : 12</li>
+  <li>Note en réseau : 14</li>
+</ul>
 
 ```
-npm install axios
+
+Si on souhaite rendre cette liste "dynamique", on peut définir des variables pour les notes. La syntaxe est identique à Twig pour les variables...
+
+```html
+<ul>
+  <li>Note sur Symfony : {{ symfony }}</li>
+  <li>Note en intégration : {{ integration }}</li>
+  <li>Note en réseau : {{ reseau }}</li>
+</ul>
+
 ```
 
-(vous pouvez utiliser Yarn).
+Si vous testez de nouveau ce code, vous aurez une erreur car les variables n'existent pas.
+Nous devons les définir.
 
-## Explications des fichiers et de la structure
+Pour cela, dans la partie javascript de notre fichier App.vue, nous allons définir une "entrée" data, qui va contenir nos valeurs.
 
-## Créer des routes
+La déclaration pourrait être :
 
-### Principes
+```js
+<script>
+export default {
+  name: 'App',
+  data: () => {
+    return {
+      symfony: 6,
+      integration: 2,
+      reseau: 8,
+    }
+  },
+}
+</script>
+```
+
+### Exercice 
+
+Ajoutez une quatrième ligne qui calcule la moyenne de ces 3 notes.
+
+## Les boucles
+
+Cette solution, fonctionnelle, n'est pas très pratique car se limite à 3 notes. On peut donc manipuler des objets ou tableaux. Pour cela, on va définir un objet notes, contenant plusieurs notes.
+
+La déclaration d'un objet se fait de manière classique en javascript, dans la partie data de votre partie script. Exemple :
+
+```js
+<script>
+export default {
+  name: 'App',
+  data: () => {
+    return {
+      notes: {
+        "Symfony": 12,
+        "Réseau": 14,
+        "Intégration": 16,
+        "Maths": 19,
+        "Anglais": 12
+      }
+    }
+  },
+}
+</script>
+```
+
+L'affichage avec une boucle, nommée [v-for](https://fr.vuejs.org/v2/guide/list.html) dans VueJs se ferait par exemple de la manière suivante :
+
+```
+<ul>
+  <li v-for="(matiere, note) in notes" :key="matiere">Note sur {{matiere}} : {{ note }}</li>
+</ul>
+```
 
 ### Exercice
 
-Créer les routes permettant de gérer les articles, les fournisseurs et la page d'acceuil. Créer les composants des différentes "pages" nécessaires.
+Calculez la moyenne des notes.
+- Une solution consiste à faire de nouveau une boucle pour calculer la moyenne dans la partie "html", pas conseillé,
+- Une autre solution consiste à utiliser les [Propriétés calculées](https://fr.vuejs.org/v2/guide/computed.html#Proprietes-calculees), en vous basant sur la documentation, proposez une méthode pour calculer la moyenne et afficher le résultat.
 
 ## Créer des composants
 
@@ -119,6 +188,33 @@ Créer des composantes pour :
   * un label, une zone de saisie, et une classe, si le champ est obligatoire ou non
 * Une liste déroulante de formulaire comprenant :
   * Un label, des données (tableau json), et une classe, si le champ est obligatoire ou non
+
+
+## Installation d'Axios
+
+On va utiliser la librairie Axios pour faire des requêtes à notre API (on pourrait utiliser Fetch).
+
+La librairie se trouve ici : https://www.npmjs.com/package/axios
+
+Et l'installation se fait avec la ligne suivante (en étant dans le répertoire de votre projet)
+
+```
+npm install axios
+```
+
+(vous pouvez utiliser Yarn).
+
+## Explications des fichiers et de la structure
+
+## Créer des routes
+
+### Principes
+
+### Exercice
+
+Créer les routes permettant de gérer les articles, les fournisseurs et la page d'acceuil. Créer les composants des différentes "pages" nécessaires.
+
+
 
 ## Manipulation de l'API
 
