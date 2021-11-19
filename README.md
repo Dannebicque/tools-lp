@@ -8,6 +8,7 @@ Cours sur les outils pour le développement back pour les LP DEV (IUT de Troyes)
 * Séance 3 : [Authentification avec JWT](vuejwt.md)
 
 
+# Partie 2
 * Séance n+1 : [PHPUnit](phpunit.md)
 * Séance n+2 : [Fixtures et Sécurité](fixtures.md)
 * Séance xx : [Mercure](mercure.md)
