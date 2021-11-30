@@ -232,7 +232,7 @@ Créer des composantes pour :
 ### Principes
   
   La logique de route dans VueJs est la suivante.
-  Vous devez définir une "zone" où seront chargées les pages en fonction des URL (<router-view></router-view>). Les liens (<router-link></router-link>) feront le lien entre un composant (une partie de page), et l'endroit où l'insérer.
+  Vous devez définir une "zone" où seront chargées les pages en fonction des URL (`<router-view></router-view>`). Les liens (`<router-link></router-link>`) feront le lien entre un composant (une partie de page), et l'endroit où l'insérer.
   
 ### Installation
 
