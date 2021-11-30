@@ -227,26 +227,103 @@ Créer des composantes pour :
 * Une liste déroulante de formulaire comprenant :
   * Un label, des données (tableau json), et une classe, si le champ est obligatoire ou non
 
-
-## Installation d'Axios
-
-On va utiliser la librairie Axios pour faire des requêtes à notre API (on pourrait utiliser Fetch).
-
-La librairie se trouve ici : https://www.npmjs.com/package/axios
-
-Et l'installation se fait avec la ligne suivante (en étant dans le répertoire de votre projet)
-
-```
-npm install axios
-```
-
-(vous pouvez utiliser Yarn).
-
 ## Créer des routes
 
 ### Principes
+  
+  La logique de route dans VueJs est la suivante.
+  Vous devez définir une "zone" où seront chargées les pages en fonction des URL (<router-view></router-view>). Les liens (<router-link></router-link>) feront le lien entre un composant (une partie de page), et l'endroit où l'insérer.
+  
+### Installation
 
-### Exercice
+Documentation officielle : https://router.vuejs.org/
+
+Pour ajouter vue-router (déjà fait normalement lors de l'installation) :
+
+```
+npm install vue-router
+```
+
+Il faut ensuite l'activer dans votre projet :
+  
+```js
+  
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter)
+```  
+
+On peut ensuite l'utiliser comme par exemple dans le code ci-dessous qui définit deux routes :
+  
+```html
+<div id="app">
+  <h1>Hello App!</h1>
+  <p>
+    <!-- use router-link component for navigation. -->
+    <!-- specify the link by passing the `to` prop. -->
+    <!-- `<router-link>` will be rendered as an `<a>` tag by default -->
+    <router-link to="/foo">Go to Foo</router-link>
+    <router-link to="/bar">Go to Bar</router-link>
+  </p>
+  <!-- route outlet -->
+  <!-- component matched by the route will render here -->
+  <router-view></router-view>
+</div>
+```
+  
+Le router-view est l'endroit ou se chargera la page associée au lien. Vous devez donc le placer au bon endroit dans votre structure de site.
+Les balises router-link sont les liens, vous devez les placez dans votre menu ou dans l'endroit désiré. l'attribut to, permet de définir l'URL du composant à chargé. On pourrait aussi manipuler un nom de route.
+  
+Dans l'état rien ne se passera, car l'url /foo ou /bar n'est pas associé à un composant. Vous devez donc ajouter le javascript associé :
+  
+Exemple, en définissant les routes dans le main.js
+  
+```js
+  // 0. If using a module system (e.g. via vue-cli), import Vue and VueRouter
+// and then call `Vue.use(VueRouter)`.
+
+// 1. Define route components.
+// These can be imported from other files
+const Foo = { template: '<div>foo</div>' }
+const Bar = { template: '<div>bar</div>' }
+
+// 2. Define some routes
+// Each route should map to a component. The "component" can
+// either be an actual component constructor created via
+// `Vue.extend()`, or just a component options object.
+// We'll talk about nested routes later.
+const routes = [
+  { path: '/foo', component: Foo },
+  { path: '/bar', component: Bar }
+]
+
+// 3. Create the router instance and pass the `routes` option
+// You can pass in additional options here, but let's
+// keep it simple for now.
+const router = new VueRouter({
+  routes // short for `routes: routes`
+})
+
+// 4. Create and mount the root instance.
+// Make sure to inject the router with the router option to make the
+// whole app router-aware.
+const app = new Vue({
+  router
+}).$mount('#app')
+
+// Now the app has started!
+  ```
+  
+### Autres concepts
+  
+  * Les routes dynamiques (avec des paramètres) : https://router.vuejs.org/guide/essentials/dynamic-matching.html#reacting-to-params-changes
+  * Les routes "imbriquées" (pour avoir des liens dans des pages chargées) : https://router.vuejs.org/guide/essentials/nested-routes.html
+  * Les routes nommées : https://router.vuejs.org/guide/essentials/named-routes.html
+  
+Il est bien sûr possible d'avoir des fichiers js contenant l'ensemble de nos routes, et d'importer ce fichier dans le main.js pour le charger dans notre projet.
+  
+## Exercice
 
 Créer les routes permettant de gérer les articles, les fournisseurs et la page d'acceuil. Créer les composants des différentes "pages" nécessaires.
 
@@ -278,6 +355,20 @@ Créer deux entités.
 
 Associez ces deux entités à ApiPlatform. Insérez quelques données dan la base de données (directement en phpMyAdmin), et testez que tout fonctionne avec Postman.
 
+## Installation d'Axios
+
+On va utiliser la librairie Axios pour faire des requêtes à notre API (on pourrait utiliser Fetch).
+
+La librairie se trouve ici : https://www.npmjs.com/package/axios
+
+Et l'installation se fait avec la ligne suivante (en étant dans le répertoire de votre projet)
+
+```
+npm install axios
+```
+
+(vous pouvez utiliser Yarn).
+  
 ## Manipulation de l'API
 
 Axios permet d'effectuer toutes les requêtes REST classique :
